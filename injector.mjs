@@ -2057,6 +2057,15 @@ const injectionSource = `(() => {
     return true;
   };
   const install = () => {
+    window.__doubaoThemeSettingsCleanup?.();
+    window.__doubaoThemeSettingsCleanup = () => {
+      // Pending callbacks from the previous injection must not reattach its panel.
+      cancelAnimationFrame(adaptationFrame);
+      cancelAnimationFrame(contentGridFrame);
+      cancelAnimationFrame(welcomeFrame);
+      settingsTrigger = null;
+      settingsLayer = null;
+    };
     window.__doubaoThemeCleanInput?.cleanup();
     window.__doubaoThemeCleanInput = null;
     window.__doubaoThemeSystemAppearanceCleanup?.();
