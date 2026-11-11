@@ -1,0 +1,114 @@
+name: Community
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: community-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  checks:
+    name: Checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run validate
+      - run: bash -n build-app.sh build-release.sh launch.sh scripts/prepare-sparkle.sh
+      - run: npx playwright install --with-deps chrome
+      - run: npm run test:ui
+
+  macos:
+    name: macOS ARM64
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && github.repository == 'kid-shane/DouStyle-Community'
+    needs: checks
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+      - name: Build community application
+        env:
+          DOUSTYLE_COMMUNITY_BUILD: '1'
+        run: |
+          test "$(uname -m)" = arm64
+          ./build-app.sh
+          mkdir -p dist
+          version="$(tr -d '[:space:]' < VERSION)"
+          archive="DouStyle-${version}-community-${GITHUB_RUN_NUMBER}-macOS-arm64.zip"
+          ditto -c -k --keepParent 'build/app/豆Style.app' "dist/$archive"
+          (cd dist && shasum -a 256 "$archive" > "$archive.sha256")
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: macos
+          path: dist/*
+          if-no-files-found: error
+
+  windows:
+    name: Windows x64 preview
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && github.repository == 'kid-shane/DouStyle-Community'
+    needs: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Build portable preview
+        run: |
+          version="$(tr -d '[:space:]' < VERSION)"
+          python3 build-windows.py --version "$version-windows-test.$GITHUB_RUN_NUMBER"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: windows
+          path: dist/*
+          if-no-files-found: error
+
+  release:
+    name: Publish preview
+    needs: [macos, windows]
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && github.repository == 'kid-shane/DouStyle-Community'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Download packages and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh run download "$GITHUB_RUN_ID" --name macos --dir dist
+          gh run download "$GITHUB_RUN_ID" --name windows --dir dist
+          (cd dist && sha256sum -c ./*.sha256)
+          version="$(tr -d '[:space:]' < VERSION)"
+          tag="community-$version-$GITHUB_RUN_NUMBER"
+          if ! gh release view "$tag" > /dev/null 2>&1; then
+            gh release create "$tag" --target "$GITHUB_SHA" --draft --prerelease --title "豆Style $version · 社区预览 $GITHUB_RUN_NUMBER" --notes-file .github/RELEASE_NOTES.md
+          fi
+          gh release upload "$tag" dist/* --clobber
+          gh release edit "$tag" --draft=false --prerelease --latest=false
