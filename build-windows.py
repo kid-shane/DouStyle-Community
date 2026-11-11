@@ -91,6 +91,8 @@ def main():
         shutil.copytree(ROOT / name, package / 'theme' / name, ignore=shutil.ignore_patterns('.DS_Store', '__pycache__'))
     for notice in ['LICENSE', 'THIRD_PARTY_NOTICES.md']:
         shutil.copy2(ROOT / notice, package / notice)
+    go_root = Path(subprocess.check_output([go, 'env', 'GOROOT'], text=True).strip())
+    shutil.copy2(go_root / 'LICENSE', package / 'GO-LICENSE.txt')
     shutil.copy2(ROOT / 'windows' / 'launcher.mjs', package / 'windows' / 'launcher.mjs')
     (package / 'VERSION').write_text(args.version + '\n', encoding='utf-8')
     with zipfile.ZipFile(archive) as source:
