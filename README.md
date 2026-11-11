@@ -13,7 +13,7 @@
 先安装豆包工作桌面端，并保存正在处理的工作；豆Style首次连接时可能重启豆包。
 
 - **macOS**：Apple 芯片，macOS 13.5+。从 Releases 下载 macOS ARM64 ZIP，解压后把「豆Style.app」移到「应用程序」，再打开。
-- **Windows**：Windows 10/11 x64 便携测试版。完整解压 Windows ZIP，双击「豆Style.exe」，详见 [WINDOWS.md](WINDOWS.md)。
+- **Windows**：Windows 10/11 x64 便携测试版。完整解压 Windows ZIP，双击「豆Style.exe」，详见 [Windows 使用说明](docs/windows.md)。
 
 GitHub 自动发布的社区包标记为 Pre-release。macOS 使用临时签名，尚无 Apple 公证；Windows 无代码签名。macOS 的来源检查可能阻止直接打开，请按系统提示自行决定是否允许运行。Windows 尚需实机反馈。包内自带运行环境，使用者无需安装 Node.js。
 
@@ -58,9 +58,21 @@ macOS 运行源码：保存工作后执行 `./launch.sh`。构建本地应用执
 Fork 仓库，在自己的分支修改，然后向 `main` 提交 PR。自动检查覆盖主题、设置、清爽输入、图片库、完整皮肤和启动器；维护者决定合入后，Actions 自动生成可下载的社区预览版本。
 
 - [贡献说明](CONTRIBUTING.md)
-- [开发约定](DEVELOPMENT.md)
-- [Style 与皮肤结构](THEMES.md)
-- [自动打包与发布](DISTRIBUTION.md)
+- [开发约定](docs/development.md)
+- [Style 与皮肤结构](docs/themes.md)
+- [自动打包与发布](docs/distribution.md)
+- [测试范围与实机验收](docs/testing.md)
+
+仓库按用途组织：
+
+| 位置 | 内容 |
+| --- | --- |
+| 根目录的运行模块、`theme.css` | Style 注入、设置界面与启动入口 |
+| `themes/`、`skins/`、`assets/` | 配色、完整皮肤与许可明确的素材 |
+| `windows/`、`packaging/`、`scripts/` | 平台启动、应用资源与发布辅助脚本 |
+| `tests/unit/`、`tests/ui/` | 自动单元测试与隔离界面回归 |
+| `tools/` | 手动客户端检查与截图工具 |
+| `docs/` | 开发、适配、测试与发布说明 |
 
 豆包页面结构随版本变化，反馈问题时请提供豆Style版本、豆包版本、操作系统、复现步骤与脱敏截图。自动化界面测试采用构造页面，实际客户端适配结果请在 PR 中注明。
 

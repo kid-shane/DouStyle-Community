@@ -11,7 +11,7 @@ test-results/
 *.tsbuildinfo
 
 # Real-client captures may contain conversations and personal settings.
-# Keep test source files (qa-*.mjs), not their generated output.
+# Automated test source lives in tests/; qa/ contains generated output.
 /qa/
 /design-explorations/**/preview*/
 /design-explorations/**/*.png
