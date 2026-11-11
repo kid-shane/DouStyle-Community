@@ -1,0 +1,1855 @@
+:root[data-doubao-theme] {
+  color-scheme: var(--db-theme-color-scheme) !important;
+  --db-layout-content-grid-gutter: var(--db-pref-content-gutter);
+  --db-layout-content-grid-width: calc(100vw - (2 * var(--db-pref-content-gutter)));
+  --content-max-width: var(--db-layout-content-grid-width) !important;
+}
+
+/* Doubao redeclares native tokens on body (OS appearance) and inline on its
+   route shell. Root-only aliases cannot cross those inheritance boundaries.
+   Rebind at the native scopes so fixed Style and system pairs stay coherent. */
+:root[data-doubao-theme],
+:root[data-doubao-theme] body,
+:root[data-doubao-theme] #chat-route-layout {
+  --s-color-brand-primary-default-raw: var(--db-theme-accent-rgb) !important;
+  --s-color-brand-primary-default: var(--db-theme-accent) !important;
+  --s-color-brand-primary-hover-raw: var(--db-theme-accent-hover-rgb) !important;
+  --s-color-brand-primary-hover: var(--db-theme-accent-hover) !important;
+  --s-color-brand-primary-pressed-raw: var(--db-theme-accent-pressed-rgb) !important;
+  --s-color-brand-primary-pressed: var(--db-theme-accent-pressed) !important;
+  --s-color-brand-primary-transparent-1: rgba(var(--db-theme-accent-rgb), 0.10) !important;
+  --s-color-brand-primary-transparent-2: rgba(var(--db-theme-accent-rgb), 0.16) !important;
+  --s-color-brand-primary-transparent-3: rgba(var(--db-theme-accent-rgb), 0.24) !important;
+
+  --s-color-bg-body: var(--db-theme-background) !important;
+  --s-color-bg-body-raw: var(--db-theme-background-rgb) !important;
+  --s-color-bg-primary: var(--db-theme-surface) !important;
+  --s-color-bg-primary-raw: var(--db-theme-surface-rgb) !important;
+  --s-color-bg-secondary: var(--db-theme-surface-secondary) !important;
+  --s-color-bg-secondary-raw: var(--db-theme-surface-secondary-rgb) !important;
+  --s-color-bg-tertiary: var(--db-theme-surface-tertiary) !important;
+  --s-color-bg-tertiary-raw: var(--db-theme-surface-tertiary-rgb) !important;
+  --s-color-bg-quaternary: var(--db-theme-border) !important;
+  --s-color-bg-quaternary-raw: var(--db-theme-border-rgb) !important;
+  --s-color-bg-content-base: var(--db-theme-surface) !important;
+  --s-color-bg-content-base-raw: var(--db-theme-surface-rgb) !important;
+  --s-color-bg-dialogs: var(--db-theme-surface) !important;
+  --s-color-bg-dialogs-raw: var(--db-theme-surface-rgb) !important;
+  --s-color-bg-float: var(--db-theme-surface-elevated) !important;
+  --s-color-bg-float-raw: var(--db-theme-surface-elevated-rgb) !important;
+  --s-color-bg-native-dialog: var(--db-theme-surface) !important;
+  --s-color-bg-native-dialog-raw: var(--db-theme-surface-rgb) !important;
+  --s-color-bg-outlined-btn: var(--db-theme-surface) !important;
+  --s-color-bg-outlined-btn-raw: var(--db-theme-surface-rgb) !important;
+  --s-color-bg-outlined-btn-hover: var(--db-theme-surface-hover) !important;
+  --s-color-bg-outlined-btn-hover-raw: var(--db-theme-surface-hover-rgb) !important;
+  --dbx-bg-float: var(--db-theme-surface-elevated) !important;
+  --dbx-bg-base-5: var(--db-theme-background) !important;
+  --dbx-bg-body-web: var(--db-theme-background) !important;
+  --s-bg-pc-base-grey: var(--db-theme-background) !important;
+  --s-color-bg-PC-base-grey: var(--db-theme-background) !important;
+  --base-bg-color: var(--db-theme-background) !important;
+  --chatarea-bg-color: var(--db-theme-background) !important;
+  --settingarea-bg-color: var(--db-theme-background) !important;
+
+  --s-color-text-primary: var(--db-theme-foreground) !important;
+  --s-color-text-primary-raw: var(--db-theme-foreground-rgb) !important;
+  --s-color-text-secondary: rgba(var(--db-theme-foreground-rgb), 0.85) !important;
+  --s-color-text-tertiary: rgba(var(--db-theme-foreground-rgb), 0.72) !important;
+  --s-color-text-quaternary: rgba(var(--db-theme-foreground-rgb), 0.48) !important;
+  --s-color-text-intact-primary: var(--db-theme-foreground) !important;
+  --s-color-text-intact-primary-raw: var(--db-theme-foreground-rgb) !important;
+  --s-color-text-intact-secondary: rgba(var(--db-theme-foreground-rgb), 0.85) !important;
+  --s-color-text-intact-tertiary: rgba(var(--db-theme-foreground-rgb), 0.72) !important;
+  --dbx-text-primary: var(--db-theme-foreground) !important;
+  --dbx-text-secondary: rgba(var(--db-theme-foreground-rgb), 0.72) !important;
+  --dbx-text-tertiary: rgba(var(--db-theme-foreground-rgb), 0.48) !important;
+  --dbx-text-markdown: var(--db-theme-foreground) !important;
+  --color-text-primary: var(--db-theme-foreground) !important;
+  --color-text-tertiary: rgba(var(--db-theme-foreground-rgb), 0.48) !important;
+  --color-dbx-text-primary: var(--db-theme-foreground) !important;
+  --color-dbx-text-secondary: rgba(var(--db-theme-foreground-rgb), 0.72) !important;
+  --md-box-samantha-normal-text-color: rgba(var(--db-theme-foreground-rgb), 0.88) !important;
+  --md-box-samantha-deep-text-color: var(--db-theme-foreground) !important;
+  --md-box-samantha-split-line-color: var(--db-theme-border) !important;
+  --md-box-samantha-blockquote-text-color: rgba(var(--db-theme-foreground-rgb), 0.72) !important;
+  --md-box-samantha-blockquote-left-border-color: var(--db-theme-border-strong) !important;
+  --md-box-samantha-li-maker-color: rgba(var(--db-theme-foreground-rgb), 0.72) !important;
+  --md-box-samantha-image-title-color: rgba(var(--db-theme-foreground-rgb), 0.72) !important;
+  --semi-color-text-0: rgba(var(--db-theme-foreground-rgb), 1) !important;
+  --semi-color-text-1: rgba(var(--db-theme-foreground-rgb), 0.85) !important;
+  --semi-color-text-2: rgba(var(--db-theme-foreground-rgb), 0.65) !important;
+  --semi-color-text-3: rgba(var(--db-theme-foreground-rgb), 0.45) !important;
+  --semi-color-black: rgba(var(--db-theme-foreground-rgb), 1) !important;
+  --semi-color-highlight: rgba(var(--db-theme-foreground-rgb), 1) !important;
+  --semi-color-border: rgba(var(--db-theme-foreground-rgb), 0.10) !important;
+  --semi-color-disabled-text: rgba(var(--db-theme-foreground-rgb), 0.35) !important;
+  --color-fg-default: var(--db-theme-foreground) !important;
+  --color-fg-muted: rgba(var(--db-theme-foreground-rgb), 0.72) !important;
+  --color-fg-subtle: rgba(var(--db-theme-foreground-rgb), 0.48) !important;
+
+  --dbx-brand-default: var(--db-theme-accent) !important;
+  --color-primary-blue: var(--db-theme-accent) !important;
+  --color-primary-50: var(--db-theme-accent) !important;
+  --color-accent-fg: var(--db-theme-link) !important;
+  --color-accent-emphasis: var(--db-theme-accent) !important;
+  --color-link-text-active: var(--db-theme-link) !important;
+  --color-link-text-hover: var(--db-theme-link-hover) !important;
+  --dbx-text-highlight: var(--db-theme-accent) !important;
+  --dbx-text-highlight-hover: var(--db-theme-accent-hover) !important;
+  --dbx-text-highlight-disable: rgba(var(--db-theme-accent-rgb), 0.45) !important;
+  --dbx-fill-highlight: var(--db-theme-accent) !important;
+  --dbx-fill-highlight-hover: var(--db-theme-accent-hover) !important;
+  --dbx-fill-highlight-disable: rgba(var(--db-theme-accent-rgb), 0.45) !important;
+  --dbx-fill-highlight-trans-10: rgba(var(--db-theme-accent-rgb), 0.12) !important;
+  --dbx-fill-highlight-trans-10-blank: rgba(var(--db-theme-accent-rgb), 0.08) !important;
+  --dbx-fill-primary-50: var(--db-theme-accent) !important;
+  --dbx-fill-primary-60: var(--db-theme-accent-deep) !important;
+  --dbx-color-blue-500: var(--db-theme-accent) !important;
+  --semi-color-primary: rgb(var(--db-theme-accent-rgb)) !important;
+  --semi-color-link: rgb(var(--db-theme-link-rgb)) !important;
+
+  --s-color-border-primary: var(--db-theme-border-strong) !important;
+  --s-color-border-secondary: var(--db-theme-border) !important;
+  --s-color-border-tertiary: rgba(var(--db-theme-foreground-rgb), 0.10) !important;
+  --s-color-border-quaternary: rgba(var(--db-theme-foreground-rgb), 0.07) !important;
+  --s-color-border-card: var(--db-theme-border) !important;
+  --dbx-line-7: var(--db-theme-border) !important;
+  --dbx-line-10: var(--db-theme-border-strong) !important;
+  --dbx-line-divider-5: rgba(var(--db-theme-foreground-rgb), 0.06) !important;
+  --dbx-line-divider-10: rgba(var(--db-theme-foreground-rgb), 0.10) !important;
+  --color-border-secondary: rgba(var(--db-theme-foreground-rgb), 0.08) !important;
+  --color-hr-default: rgba(var(--db-theme-foreground-rgb), 0.08) !important;
+
+  --dbx-fill-trans-10-hover: rgba(var(--db-theme-foreground-rgb), 0.06) !important;
+  --dbx-fill-trans-20-hover: rgba(var(--db-theme-foreground-rgb), 0.09) !important;
+  --s-color-bg-trans-primary: rgba(var(--db-theme-foreground-rgb), 0.06) !important;
+  --s-color-bg-trans-secondary: rgba(var(--db-theme-foreground-rgb), 0.10) !important;
+  --hover-bg-color: var(--db-theme-surface-hover) !important;
+  --active-bg-color: rgba(var(--db-theme-accent-rgb), 0.18) !important;
+  --selected-bg-color: rgba(var(--db-theme-accent-rgb), 0.16) !important;
+
+  --input-guidance-input-container-background: var(--db-theme-surface) !important;
+  --input-guidance-input-container-border: 1px solid var(--db-theme-border) !important;
+  --scrollbar-color: var(--db-theme-scrollbar) !important;
+  --scrollbar-hover-color: var(--db-theme-scrollbar-hover) !important;
+}
+
+:root[data-doubao-theme],
+:root[data-doubao-theme] body,
+:root[data-doubao-theme] #root,
+:root[data-doubao-theme] #chat-route-layout,
+:root[data-doubao-theme] #chat-route-main,
+:root[data-doubao-theme] main {
+  background-color: var(--db-theme-background) !important;
+  color: var(--db-theme-foreground) !important;
+}
+
+:root[data-doubao-theme]
+  #flow-chat-guidance-page img[src*="doubao-office-logo"] {
+  display: none !important;
+}
+
+:root[data-doubao-theme]
+  #flow-chat-guidance-page div:has(> img[src*="doubao-office-logo"]) {
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+:root[data-doubao-theme] #flow-chat-guidance-page .doubao-theme-welcome-image {
+  --db-welcome-image-fit: contain;
+  --db-welcome-image-position-x: 50%;
+  --db-welcome-image-position-y: 50%;
+  display: grid !important;
+  position: relative !important;
+  place-items: center !important;
+  width: 150px !important;
+  height: 75px !important;
+  flex: 0 0 auto !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+:root[data-doubao-theme] #flow-chat-guidance-page .doubao-theme-welcome-image[data-welcome-asset="custom"] {
+  height: 90px !important;
+}
+
+:root[data-doubao-theme] #flow-chat-guidance-page .doubao-theme-welcome-image canvas,
+:root[data-doubao-theme] #flow-chat-guidance-page .doubao-theme-welcome-image img {
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: var(--db-welcome-image-fit) !important;
+  object-position: var(--db-welcome-image-position-x) var(--db-welcome-image-position-y) !important;
+  transform: none !important;
+}
+
+:root[data-doubao-theme]
+  #flow-chat-guidance-page #experiment-guidance-suggestions {
+  display: none !important;
+}
+
+:root[data-doubao-theme] body,
+:root[data-doubao-theme] button,
+:root[data-doubao-theme] input,
+:root[data-doubao-theme] textarea,
+:root[data-doubao-theme] [contenteditable="true"] {
+  font-family: var(--db-theme-font-ui) !important;
+  font-size: var(--db-pref-ui-font-size) !important;
+}
+
+:root[data-doubao-theme]
+  [class*="max-w-(--content-max-width)"]:has(> [data-testid="union_message"]) {
+  width: 100% !important;
+  max-width: var(--db-layout-content-grid-width) !important;
+  margin-inline: auto !important;
+}
+
+:root[data-doubao-theme]
+  [class*="max-w-(--content-max-width)"] > [data-testid="union_message"] {
+  padding-inline: 0 !important;
+}
+
+:root[data-doubao-theme]
+  [class*="max-w-[var(--content-max-width)]"]:has(#input-engine-container) {
+  width: 100% !important;
+  max-width: var(--db-layout-content-grid-width) !important;
+  margin-inline: auto !important;
+}
+
+:root[data-doubao-theme]
+  [class*="max-w-(--content-max-width)"]:has(#input-engine-container) {
+  width: 100% !important;
+  max-width: var(--db-layout-content-grid-width) !important;
+  margin-inline: auto !important;
+}
+
+:root[data-doubao-theme] #input-engine-container {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+:root[data-doubao-theme] #flow_chat_sidebar {
+  background-color: var(--db-theme-sidebar) !important;
+  border-color: var(--db-theme-border) !important;
+  backdrop-filter: none !important;
+}
+
+:root[data-doubao-theme] #flow_chat_sidebar [class*="group/sidebar_nav_item"],
+:root[data-doubao-theme] #flow_chat_sidebar [class*="group/sidebar_nav_item"] *,
+:root[data-doubao-theme] #flow_chat_sidebar [data-testid="conversation-list-v2-item"],
+:root[data-doubao-theme] #flow_chat_sidebar [data-testid="conversation-list-v2-item"] *,
+:root[data-doubao-theme] #flow_chat_sidebar section[data-project-id] [class*="group/project-row"],
+:root[data-doubao-theme] #flow_chat_sidebar section[data-project-id] [class*="group/project-row"] * {
+  font-size: var(--db-pref-ui-font-size) !important;
+}
+
+:root[data-doubao-theme] #flow_chat_sidebar [class*="group/sidebar_nav_item"],
+:root[data-doubao-theme] #flow_chat_sidebar [class*="group/sidebar_nav_item"] > span,
+:root[data-doubao-theme] #flow_chat_sidebar [class*="group/sidebar_nav_item"] .truncate,
+:root[data-doubao-theme] #flow_chat_sidebar [class*="group/sidebar_nav_item"] .truncate > span {
+  color: var(--db-theme-foreground) !important;
+}
+:root[data-doubao-theme] #flow_chat_sidebar [class*="group/sidebar_nav_item"]:hover {
+  background-color: var(--db-theme-surface-hover) !important;
+}
+:root[data-doubao-theme] #flow_chat_sidebar [class*="group/sidebar_nav_item"]:focus-visible {
+  outline: 2px solid var(--db-theme-accent) !important;
+  outline-offset: -2px !important;
+}
+
+:root[data-doubao-theme]
+  #flow_chat_sidebar [class*="group/sidebar_nav_item"] > svg:first-child {
+  color: var(--db-theme-accent) !important;
+}
+
+:root[data-doubao-theme] [class*="greeting-text-"]::after {
+  background: var(--db-theme-background) !important;
+}
+
+:root[data-doubao-theme]
+  [class*="message-container-"]:has(> [class*="message-area-"] > [class*="skeleton-"]) {
+  display: none !important;
+}
+
+:root[data-doubao-theme]
+  #flow-chat-guidance-page [class*="greeting-text-"] {
+  font-family: var(--db-theme-font-chat) !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+}
+
+:root[data-doubao-theme]
+  [data-testid="editable_conversation_name"] [data-slot="dropdown-menu-trigger"] {
+  background: transparent !important;
+}
+
+:root[data-doubao-theme] #flow_chat_sidebar [aria-current="page"],
+:root[data-doubao-theme] #flow_chat_sidebar [class~="bg-dbx-fill-trans-10-hover"] {
+  background-color: var(--db-theme-selection-background) !important;
+}
+
+:root[data-doubao-theme][data-doubao-chat-icons="hidden"]
+  [data-testid="conversation-list-v2-item"] > span.size-20.shrink-0:first-child {
+  display: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-adapted-surface,
+:root[data-doubao-theme] [class*="to-bottom-button-"] {
+  background-color: var(--db-theme-surface-elevated) !important;
+  color: var(--db-theme-foreground) !important;
+  border-color: var(--db-theme-border) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-adapted-surface button,
+:root[data-doubao-theme] .doubao-theme-adapted-surface [role="button"] {
+  color: rgba(var(--db-theme-foreground-rgb), 0.72) !important;
+}
+
+:root[data-doubao-theme] [class*="html-previewer-wrapper"] {
+  border: 1px solid var(--db-theme-border) !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 10px 28px var(--db-theme-overlay-shadow) !important;
+}
+
+:root[data-doubao-theme] .html-previewer,
+:root[data-doubao-theme] .html-previewer iframe {
+  background-color: var(--db-theme-content-canvas) !important;
+}
+
+:root[data-doubao-theme]
+  .md-box-root [class~="bg-s-color-bg-quaternary"][class~="absolute"][class~="h-36"][class*="tabbar-"] {
+  background-color: var(--db-theme-surface-elevated) !important;
+  color: var(--db-theme-foreground) !important;
+  border-color: var(--db-theme-border-strong) !important;
+  box-shadow: 0 8px 24px var(--db-theme-overlay-shadow) !important;
+}
+
+:root[data-doubao-theme]
+  .md-box-root [class~="bg-s-color-bg-quaternary"][class*="tabbar-"] [class*="divider-"] {
+  background-color: var(--db-theme-border) !important;
+}
+
+:root[data-doubao-theme]
+  .md-box-root [class~="bg-s-color-bg-quaternary"][class*="tabbar-"] [class*="actionBtn-"]:hover,
+:root[data-doubao-theme]
+  .md-box-root [class~="bg-s-color-bg-quaternary"][class*="tabbar-"] [role="tab"]:hover {
+  background-color: var(--db-theme-surface-hover) !important;
+}
+
+:root[data-doubao-theme]
+  .md-box-root [class~="bg-s-color-bg-quaternary"][class*="tabbar-"] [role="tab"][class*="active"] {
+  background-color: rgba(var(--db-theme-accent-rgb), 0.14) !important;
+}
+
+:root[data-doubao-theme] .guidance-input-surface,
+:root[data-doubao-theme] #input-engine-container > div,
+:root[data-doubao-theme] [class*="input-surface"] {
+  background: var(--db-theme-surface) !important;
+  color: var(--db-theme-foreground) !important;
+}
+
+:root[data-doubao-theme] #input-engine-container::after {
+  border-color: var(--db-theme-border) !important;
+}
+
+/* New composers supply a blue inline --active-shadow; preserve native state
+   activation while deriving the glow from the selected Style. */
+:root[data-doubao-theme] [data-testid="chat_input"] {
+  --active-shadow: 0 2px 4px 0 rgba(var(--db-theme-accent-rgb), 0.02),
+    0 4px 12px 0 rgba(var(--db-theme-accent-rgb), 0.04),
+    0 8px 24px 0 rgba(var(--db-theme-accent-rgb), 0.17) !important;
+}
+
+/* Some page variants add their own resting shadow on the engine container.
+   Complete skins retain their authored composer relief. */
+:root[data-doubao-theme]:not([data-doubao-skin]) #input-engine-container {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02),
+    0 4px 16px rgba(0, 0, 0, 0.04), 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+}
+:root[data-doubao-theme]:not([data-doubao-skin]) #input-engine-container:is(:focus-within, :has(:active), :has([data-state="active"])) {
+  box-shadow: var(--active-shadow) !important;
+}
+:root[data-doubao-theme]:not([data-doubao-skin]) #input-engine-container:focus-within::after {
+  border-color: rgba(var(--db-theme-accent-rgb), 0.45) !important;
+}
+
+:root[data-doubao-theme] a {
+  color: var(--db-theme-link) !important;
+}
+
+:root[data-doubao-theme] [class*="text-s-color-brand"],
+:root[data-doubao-theme] [class*="text-dbx-text-highlight"] {
+  color: var(--db-theme-accent) !important;
+}
+
+:root[data-doubao-theme] .md-box-root,
+:root[data-doubao-theme] .md-box-root p,
+:root[data-doubao-theme] .md-box-root li,
+:root[data-doubao-theme] .md-box-root h1,
+:root[data-doubao-theme] .md-box-root h2,
+:root[data-doubao-theme] .md-box-root h3,
+:root[data-doubao-theme] .md-box-root h4,
+:root[data-doubao-theme] .md-box-root h5,
+:root[data-doubao-theme] .md-box-root h6,
+:root[data-doubao-theme] .md-box-root strong,
+:root[data-doubao-theme] .md-box-root em,
+:root[data-doubao-theme] .md-box-root blockquote,
+:root[data-doubao-theme] .md-box-root th,
+:root[data-doubao-theme] .md-box-root td {
+  color: var(--db-theme-foreground) !important;
+  font-family: var(--db-theme-font-chat) !important;
+}
+
+:root[data-doubao-theme] .md-box-root * {
+  color: var(--db-theme-foreground) !important;
+  font-family: inherit !important;
+}
+
+:root[data-doubao-theme] .md-box-root {
+  font-size: var(--db-pref-chat-font-size) !important;
+  line-height: var(--db-pref-chat-line-height) !important;
+}
+
+:root[data-doubao-theme] .md-box-root p,
+:root[data-doubao-theme] .md-box-root li,
+:root[data-doubao-theme] .md-box-root blockquote,
+:root[data-doubao-theme] .md-box-root td,
+:root[data-doubao-theme] .md-box-root th {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+:root[data-doubao-theme][data-doubao-uniform-chat-typography="true"]
+  .md-box-root :is(h1, h2, h3, h4, h5, h6),
+:root[data-doubao-theme][data-doubao-uniform-chat-typography="true"]
+  .md-box-root :is(h1, h2, h3, h4, h5, h6) *,
+:root[data-doubao-theme][data-doubao-uniform-chat-typography="true"]
+  .md-box-root div:not(:has(> :is(div, ul, ol, table, pre, blockquote, h1, h2, h3, h4, h5, h6))),
+:root[data-doubao-theme][data-doubao-uniform-chat-typography="true"]
+  .md-box-root div:not(:has(> :is(div, ul, ol, table, pre, blockquote, h1, h2, h3, h4, h5, h6))) * {
+  font-size: var(--db-pref-chat-font-size) !important;
+  line-height: var(--db-pref-chat-line-height) !important;
+}
+
+:root[data-doubao-theme][data-doubao-uniform-chat-typography="true"]
+  .md-box-root table,
+:root[data-doubao-theme][data-doubao-uniform-chat-typography="true"]
+  .md-box-root table :is(th, td),
+:root[data-doubao-theme][data-doubao-uniform-chat-typography="true"]
+  .md-box-root table :is(th, td) * {
+  font-size: var(--db-pref-chat-font-size) !important;
+  line-height: var(--db-pref-chat-line-height) !important;
+}
+
+:root[data-doubao-theme][data-doubao-uniform-chat-typography="true"]
+  [data-testid="receive_message"] [class~="text-[14px]"][class~="leading-[28px]"]:is([class~="text-dbx-text-secondary"], [class~="text-dbx-text-primary"]) {
+  font-size: var(--db-pref-chat-font-size) !important;
+  line-height: var(--db-pref-chat-line-height) !important;
+}
+
+:root[data-doubao-theme] .md-box-root a {
+  color: var(--db-theme-link) !important;
+}
+
+:root[data-doubao-theme] .md-box-root a:hover {
+  color: var(--db-theme-link-hover) !important;
+}
+
+:root[data-doubao-theme] .md-box-root li > button[class*="cursor-pointer"][class*="bg-transparent"],
+:root[data-doubao-theme] .md-box-root li > button[class*="cursor-pointer"][class*="bg-transparent"] * {
+  color: var(--db-theme-link) !important;
+}
+
+:root[data-doubao-theme] .md-box-root li > button[class*="cursor-pointer"][class*="bg-transparent"]:hover {
+  background-color: rgba(var(--db-theme-accent-rgb), 0.12) !important;
+  color: var(--db-theme-link-hover) !important;
+}
+
+:root[data-doubao-theme] .md-box-root li > button[class*="cursor-pointer"][class*="bg-transparent"]:hover * {
+  color: var(--db-theme-link-hover) !important;
+}
+
+:root[data-doubao-theme] .md-box-root li > button[class*="cursor-pointer"][class*="bg-transparent"]:focus-visible {
+  outline: 2px solid var(--db-theme-accent) !important;
+  outline-offset: 2px !important;
+}
+
+:root[data-doubao-theme] [class*="bg-g-send-msg-bubble-bg"] {
+  background: var(--db-theme-user-message-background) !important;
+  color: var(--db-theme-user-message-text) !important;
+}
+
+/* The native long-message wrapper owns the collapsed background and CTA.
+   Match the user bubble without changing its height, mask or expand behavior. */
+:root[data-doubao-theme] [data-send-message-collapsed] {
+  --send-collapse-bg: var(--db-theme-user-message-background) !important;
+}
+
+:root[data-doubao-theme] [data-send-message-collapsed="true"] [class*="bg-g-send-msg-bubble-bg"] {
+  background: transparent !important;
+}
+
+:root[data-doubao-theme] [data-send-message-collapsed] [data-testid="message_expand_all_button"],
+:root[data-doubao-theme] [data-send-message-collapsed] [data-testid="message_expand_all_button"] > span {
+  color: var(--db-theme-user-message-text) !important;
+  opacity: 1 !important;
+}
+
+:root[data-doubao-theme] [class*="bg-g-send-msg-bubble-bg"] .md-box-root,
+:root[data-doubao-theme] [class*="bg-g-send-msg-bubble-bg"] .md-box-root * {
+  color: var(--db-theme-user-message-text) !important;
+  --md-box-color-fg: var(--db-theme-user-message-text) !important;
+  --md-box-color-fg-muted: var(--db-theme-user-message-text) !important;
+  --md-box-color-accent: var(--db-theme-user-message-text) !important;
+}
+
+:root[data-doubao-theme]
+  [class*="bg-g-send-msg-bubble-bg"] [data-testid="ref-content-wrapper"],
+:root[data-doubao-theme]
+  [class*="bg-g-send-msg-bubble-bg"] [data-testid="ref-content-wrapper"] [data-testid="ref-content"],
+:root[data-doubao-theme]
+  [class*="bg-g-send-msg-bubble-bg"] [data-testid="ref-content-wrapper"] [data-testid="ref-content"] * {
+  color: var(--db-theme-user-message-text) !important;
+}
+
+:root[data-doubao-theme]
+  [class*="bg-g-send-msg-bubble-bg"] [data-testid="ref-content-wrapper"] [data-testid="ref-content"] {
+  opacity: 0.72 !important;
+}
+
+:root[data-doubao-theme]
+  [class*="bg-g-send-msg-bubble-bg"] [data-testid="ref-content-wrapper"] > [class*="bg-g-send-msg-ref-content-line-bg"] {
+  background-color: var(--db-theme-user-message-text) !important;
+  opacity: 0.32 !important;
+}
+
+:root[data-doubao-theme][data-doubao-uniform-chat-typography="true"]
+  [class*="bg-g-send-msg-bubble-bg"] [data-testid="message_text_content"].md-box-root,
+:root[data-doubao-theme][data-doubao-uniform-chat-typography="true"]
+  [class*="bg-g-send-msg-bubble-bg"] [data-testid="message_text_content"].md-box-root * {
+  font-size: var(--db-pref-chat-font-size) !important;
+  line-height: var(--db-pref-chat-line-height) !important;
+}
+
+:root[data-doubao-theme][data-doubao-uniform-chat-typography="true"]
+  [data-testid="send_message"] [class*="bg-g-send-msg-bubble-bg"],
+:root[data-doubao-theme][data-doubao-uniform-chat-typography="true"]
+  [data-testid="send_message"] [class*="bg-g-send-msg-bubble-bg"] * {
+  font-size: var(--db-pref-chat-font-size) !important;
+  line-height: var(--db-pref-chat-line-height) !important;
+}
+
+:root[data-doubao-theme][data-doubao-uniform-chat-typography="true"]
+  [class*="bg-g-send-msg-bubble-bg"] [data-testid="ref-content-wrapper"] [data-testid="ref-content"],
+:root[data-doubao-theme][data-doubao-uniform-chat-typography="true"]
+  [class*="bg-g-send-msg-bubble-bg"] [data-testid="ref-content-wrapper"] [data-testid="ref-content"] * {
+  font-size: var(--db-pref-chat-font-size) !important;
+  line-height: var(--db-pref-chat-line-height) !important;
+}
+
+:root[data-doubao-theme] .md-box-root table,
+:root[data-doubao-theme] .md-box-root th,
+:root[data-doubao-theme] .md-box-root td {
+  border-color: var(--db-theme-border) !important;
+}
+
+:root[data-doubao-theme] .md-box-root code {
+  background-color: var(--db-theme-surface-elevated) !important;
+}
+
+:root[data-doubao-theme] ::selection {
+  background: rgba(var(--db-theme-accent-rgb), 0.38) !important;
+  color: var(--db-theme-foreground) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-trigger[hidden] {
+  display: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-trigger {
+  position: absolute !important;
+  z-index: 2 !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  color: var(--db-theme-foreground) !important;
+  box-shadow: none !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  pointer-events: inherit !important;
+}
+
+:root[data-doubao-theme] [data-doubao-style-title-host] {
+  position: relative !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-trigger:hover {
+  background: var(--db-theme-selection-background) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-trigger svg {
+  width: 22px !important;
+  height: 22px !important;
+  overflow: visible !important;
+  pointer-events: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  transform-origin: center !important;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.12)) !important;
+  transition: opacity 140ms ease, transform 140ms ease !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-trigger svg path {
+  stroke: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-trigger[data-discovered="true"] svg {
+  opacity: 0 !important;
+  transform: scale(0.85) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-trigger:hover svg,
+:root[data-doubao-theme] .doubao-theme-settings-trigger:focus-visible svg {
+  opacity: 1 !important;
+  transform: scale(1) rotate(0deg) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root[data-doubao-theme] .doubao-theme-settings-trigger svg {
+    transition: none !important;
+  }
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-trigger:focus-visible,
+:root[data-doubao-theme] .doubao-theme-settings-panel button:focus-visible,
+:root[data-doubao-theme] .doubao-theme-settings-panel input:focus-visible,
+:root[data-doubao-theme] .doubao-theme-settings-panel select:focus-visible {
+  outline: 2px solid var(--db-theme-accent) !important;
+  outline-offset: 2px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-layer[hidden] {
+  display: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-layer {
+  position: fixed !important;
+  z-index: 2147483647 !important;
+  inset: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+  pointer-events: auto !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: 16px !important;
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel {
+  display: grid !important;
+  grid-template-rows: auto auto minmax(0, 1fr) auto !important;
+  width: min(640px, calc(100vw - 32px)) !important;
+  /* Keep tabs equally tall, with 48px extra content to reveal the next group. */
+  box-sizing: border-box !important;
+  height: 651px !important;
+  max-height: calc(100vh - 32px) !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(var(--db-theme-foreground-rgb), 0.10) !important;
+  border-radius: 20px !important;
+  background: var(--db-theme-surface-elevated) !important;
+  color: var(--db-theme-foreground) !important;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.32), 0 1px 0 rgba(var(--db-theme-foreground-rgb), 0.05) inset !important;
+  font-family: var(--db-theme-font-ui) !important;
+  font-size: 14px !important;
+  will-change: transform !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-header,
+:root[data-doubao-theme] .doubao-theme-settings-footer {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding: 16px 20px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-header {
+  border-bottom: 0 !important;
+  cursor: grab !important;
+  touch-action: none !important;
+  user-select: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel.is-dragging .doubao-theme-settings-header {
+  cursor: grabbing !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-header button {
+  cursor: pointer !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-footer {
+  min-height: 52px !important;
+  padding-top: 9px !important;
+  padding-bottom: 9px !important;
+  border-top: 1px solid var(--db-theme-border) !important;
+  background: rgba(var(--db-theme-surface-secondary-rgb), 0.52) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-title {
+  margin: 0 !important;
+  color: var(--db-theme-foreground) !important;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 22px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-theme-name {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  margin: 3px 0 0 !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.52) !important;
+  font-size: 12px !important;
+  line-height: 18px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-theme-name::before {
+  content: "" !important;
+  width: 5px !important;
+  height: 5px !important;
+  flex: 0 0 auto !important;
+  border-radius: 999px !important;
+  background: var(--db-theme-accent) !important;
+  box-shadow: 0 0 0 3px rgba(var(--db-theme-accent-rgb), 0.12) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-tabs {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 3px !important;
+  margin: 0 20px 10px !important;
+  padding: 3px !important;
+  border: 1px solid rgba(var(--db-theme-foreground-rgb), 0.06) !important;
+  border-radius: 11px !important;
+  background: var(--db-theme-surface-secondary) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-settings-tab {
+  min-height: 36px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.58) !important;
+  font-weight: 500 !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-settings-tab[aria-selected="true"] {
+  border-color: transparent !important;
+  background: var(--db-theme-surface-elevated) !important;
+  color: var(--db-theme-foreground) !important;
+  box-shadow: 0 1px 2px var(--db-theme-overlay-shadow), 0 1px 0 rgba(var(--db-theme-foreground-rgb), 0.04) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-content {
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+  scrollbar-gutter: stable !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-pane[hidden] {
+  display: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-pane {
+  padding: 0 20px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-controls {
+  display: grid !important;
+  gap: 0 !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-pane {
+  display: grid !important;
+  gap: 10px !important;
+  padding-top: 4px !important;
+  padding-bottom: 14px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-preview {
+  overflow: hidden !important;
+  border: 1px solid var(--db-theme-border) !important;
+  border-radius: 13px !important;
+  background: var(--db-theme-background) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-preview-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  min-height: 40px !important;
+  padding: 0 14px !important;
+  border-bottom: 1px solid var(--db-theme-border) !important;
+  background: rgba(var(--db-theme-surface-secondary-rgb), 0.58) !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.52) !important;
+  font-size: 11px !important;
+  line-height: 16px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-preview-header > :first-child {
+  color: rgba(var(--db-theme-foreground-rgb), 0.76) !important;
+  font-weight: 500 !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-preview-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-welcome-preview-actions button {
+  min-height: 26px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-zoom-control {
+  display: inline-flex !important;
+  align-items: center !important;
+  height: 26px !important;
+  overflow: hidden !important;
+  border: 1px solid var(--db-theme-border) !important;
+  border-radius: 8px !important;
+  background: var(--db-theme-background) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-welcome-zoom-control button {
+  width: 28px !important;
+  min-width: 28px !important;
+  min-height: 24px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  font-size: 15px !important;
+  line-height: 24px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-zoom-control output {
+  display: inline-grid !important;
+  min-width: 44px !important;
+  height: 24px !important;
+  place-items: center !important;
+  border-right: 1px solid var(--db-theme-border) !important;
+  border-left: 1px solid var(--db-theme-border) !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.72) !important;
+  font-size: 11px !important;
+  font-variant-numeric: tabular-nums !important;
+  line-height: 24px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-preview:has(.doubao-theme-welcome-crop-frame[data-croppable="false"])
+  .doubao-theme-welcome-preview-actions > span {
+  display: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-preview-stage {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  min-height: 246px !important;
+  padding: 16px 20px 18px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-crop-frame {
+  position: relative !important;
+  width: min(100%, 300px) !important;
+  aspect-ratio: 5 / 3 !important;
+  flex: 0 0 auto !important;
+  overflow: hidden !important;
+  border: 1px solid var(--db-theme-border) !important;
+  border-radius: 10px !important;
+  background: var(--db-theme-surface-secondary) !important;
+  touch-action: none !important;
+  user-select: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-crop-frame[data-croppable="true"] {
+  cursor: grab !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-crop-frame[data-croppable="true"].is-dragging {
+  cursor: grabbing !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-crop-frame::before {
+  content: "" !important;
+  position: absolute !important;
+  z-index: 2 !important;
+  inset: 0 !important;
+  background-image:
+    linear-gradient(to right, transparent 33.1%, rgba(255, 255, 255, 0.52) 33.2%, rgba(255, 255, 255, 0.52) 33.5%, transparent 33.6%, transparent 66.4%, rgba(255, 255, 255, 0.52) 66.5%, rgba(255, 255, 255, 0.52) 66.8%, transparent 66.9%),
+    linear-gradient(to bottom, transparent 33.1%, rgba(255, 255, 255, 0.52) 33.2%, rgba(255, 255, 255, 0.52) 33.5%, transparent 33.6%, transparent 66.4%, rgba(255, 255, 255, 0.52) 66.5%, rgba(255, 255, 255, 0.52) 66.8%, transparent 66.9%) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 120ms ease !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-crop-frame[data-croppable="true"]:hover::before,
+:root[data-doubao-theme] .doubao-theme-welcome-crop-frame[data-croppable="true"]:focus-visible::before,
+:root[data-doubao-theme] .doubao-theme-welcome-crop-frame[data-croppable="true"].is-dragging::before {
+  opacity: 0.72 !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-crop-frame:focus-visible {
+  outline: 2px solid var(--db-theme-accent) !important;
+  outline-offset: 2px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-preview-image {
+  --db-welcome-image-fit: contain;
+  --db-welcome-image-position-x: 50%;
+  --db-welcome-image-position-y: 50%;
+  display: grid !important;
+  position: absolute !important;
+  inset: 0 !important;
+  place-items: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.34) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-preview-image canvas,
+:root[data-doubao-theme] .doubao-theme-welcome-preview-image img {
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: var(--db-welcome-image-fit) !important;
+  object-position: var(--db-welcome-image-position-x) var(--db-welcome-image-position-y) !important;
+  transform: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-crop-hint {
+  position: absolute !important;
+  z-index: 3 !important;
+  left: 50% !important;
+  bottom: 10px !important;
+  padding: 5px 9px !important;
+  border-radius: 999px !important;
+  background: rgba(0, 0, 0, 0.62) !important;
+  color: rgb(255, 255, 255) !important;
+  font-size: 11px !important;
+  line-height: 16px !important;
+  white-space: nowrap !important;
+  opacity: 0 !important;
+  transform: translateX(-50%) translateY(3px) !important;
+  transition: opacity 120ms ease, transform 120ms ease !important;
+  pointer-events: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-crop-frame[data-croppable="true"]:hover .doubao-theme-welcome-crop-hint,
+:root[data-doubao-theme] .doubao-theme-welcome-crop-frame[data-croppable="true"]:focus-visible .doubao-theme-welcome-crop-hint,
+:root[data-doubao-theme] .doubao-theme-welcome-crop-frame[data-croppable="true"].is-dragging .doubao-theme-welcome-crop-hint {
+  opacity: 1 !important;
+  transform: translateX(-50%) translateY(0) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root[data-doubao-theme] .doubao-theme-welcome-crop-frame::before,
+  :root[data-doubao-theme] .doubao-theme-welcome-crop-hint {
+    transition: none !important;
+  }
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-preview-empty {
+  font-size: 12px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-preview-text {
+  max-width: min(100%, 460px) !important;
+  margin-top: 0 !important;
+  color: var(--db-theme-foreground) !important;
+  font-family: var(--db-theme-font-chat) !important;
+  font-size: 24px !important;
+  font-weight: 550 !important;
+  line-height: 1.3 !important;
+  text-align: center !important;
+  overflow-wrap: anywhere !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-section {
+  display: grid !important;
+  gap: 12px !important;
+  padding: 13px 14px !important;
+  border: 1px solid var(--db-theme-border) !important;
+  border-radius: 12px !important;
+  background: var(--db-theme-surface) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-section-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-text-control {
+  position: relative !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-text-input {
+  width: 100% !important;
+  height: 40px !important;
+  padding: 0 66px 0 12px !important;
+  border: 1px solid var(--db-theme-border-strong) !important;
+  border-radius: 9px !important;
+  background: var(--db-theme-surface-elevated) !important;
+  color: var(--db-theme-foreground) !important;
+  font-family: var(--db-theme-font-ui) !important;
+  font-size: 13px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-text-count {
+  position: absolute !important;
+  top: 50% !important;
+  right: 12px !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.38) !important;
+  font-size: 11px !important;
+  font-variant-numeric: tabular-nums !important;
+  transform: translateY(-50%) !important;
+  pointer-events: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-image-control {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-file-input {
+  display: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-welcome-primary-action {
+  border-color: rgba(var(--db-theme-accent-rgb), 0.42) !important;
+  background: rgba(var(--db-theme-accent-rgb), 0.14) !important;
+  color: var(--db-theme-foreground) !important;
+  font-weight: 500 !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-welcome-quiet-action {
+  min-height: 28px !important;
+  padding: 0 7px !important;
+  border-color: transparent !important;
+  background: transparent !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.54) !important;
+  font-size: 12px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-welcome-image-control .doubao-theme-welcome-quiet-action {
+  margin-left: auto !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-library-section {
+  display: grid !important;
+  gap: 8px !important;
+  padding-top: 2px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-library-section + .doubao-theme-welcome-library-section {
+  padding-top: 10px !important;
+  border-top: 1px solid var(--db-theme-border) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-library-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-library-title {
+  color: rgba(var(--db-theme-foreground-rgb), 0.72) !important;
+  font-size: 12px !important;
+  font-weight: 550 !important;
+  line-height: 18px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-library-count {
+  color: rgba(var(--db-theme-foreground-rgb), 0.42) !important;
+  font-size: 11px !important;
+  font-variant-numeric: tabular-nums !important;
+  line-height: 18px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-library-empty {
+  display: grid !important;
+  min-height: 54px !important;
+  margin: 0 !important;
+  place-items: center !important;
+  border: 1px dashed var(--db-theme-border) !important;
+  border-radius: 9px !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.38) !important;
+  font-size: 11px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-library-empty[hidden] {
+  display: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-library-grid {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-library-item {
+  position: relative !important;
+  min-width: 0 !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-welcome-library-card,
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-welcome-builtin-card {
+  display: grid !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  gap: 5px !important;
+  padding: 3px 3px 6px !important;
+  overflow: hidden !important;
+  border-color: var(--db-theme-border) !important;
+  border-radius: 10px !important;
+  background: var(--db-theme-surface-secondary) !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.68) !important;
+  text-align: left !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-welcome-library-card:hover,
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-welcome-builtin-card:hover {
+  border-color: rgba(var(--db-theme-accent-rgb), 0.52) !important;
+  background: rgba(var(--db-theme-accent-rgb), 0.10) !important;
+  color: var(--db-theme-foreground) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-welcome-library-card[aria-pressed="true"],
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-welcome-builtin-card[aria-pressed="true"] {
+  border-color: var(--db-theme-accent) !important;
+  background: rgba(var(--db-theme-accent-rgb), 0.12) !important;
+  box-shadow: 0 0 0 2px rgba(var(--db-theme-accent-rgb), 0.14) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-library-thumbnail,
+:root[data-doubao-theme] .doubao-theme-welcome-builtin-thumbnail {
+  display: grid !important;
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 5 / 3 !important;
+  overflow: hidden !important;
+  place-items: center !important;
+  border-radius: 7px !important;
+  background: var(--db-theme-surface-elevated) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-library-thumbnail img,
+:root[data-doubao-theme] .doubao-theme-welcome-builtin-thumbnail img,
+:root[data-doubao-theme] .doubao-theme-welcome-builtin-thumbnail canvas {
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-library-caption {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  padding: 0 3px !important;
+  font-size: 10px !important;
+  line-height: 16px !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-welcome-library-remove {
+  position: absolute !important;
+  z-index: 2 !important;
+  top: 5px !important;
+  right: 5px !important;
+  width: 24px !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 7px !important;
+  background: rgba(0, 0, 0, 0.64) !important;
+  color: rgb(255, 255, 255) !important;
+  opacity: 0 !important;
+  transform: translateY(-2px) !important;
+  transition: opacity 120ms ease, transform 120ms ease, background-color 120ms ease !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-library-item:hover .doubao-theme-welcome-library-remove,
+:root[data-doubao-theme] .doubao-theme-welcome-library-item:focus-within .doubao-theme-welcome-library-remove {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-welcome-library-remove:hover {
+  background: var(--db-theme-foreground) !important;
+  color: var(--db-theme-background) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-builtin-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 112px)) !important;
+  gap: 8px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-none-mark {
+  display: grid !important;
+  width: 28px !important;
+  height: 28px !important;
+  place-items: center !important;
+  border: 1px solid var(--db-theme-border) !important;
+  border-radius: 999px !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.42) !important;
+  font-size: 10px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel button:disabled {
+  opacity: 0.42 !important;
+  cursor: default !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-status {
+  min-height: 18px !important;
+  margin: -2px 2px 0 !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.52) !important;
+  font-size: 12px !important;
+  line-height: 18px !important;
+  text-align: left !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-welcome-status[data-error="true"] {
+  color: var(--db-theme-accent-pressed) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-preset-row,
+:root[data-doubao-theme] .doubao-theme-color-row {
+  display: grid !important;
+  grid-template-columns: minmax(220px, 1fr) minmax(190px, 0.8fr) !important;
+  align-items: center !important;
+  gap: 24px !important;
+  min-height: 68px !important;
+  border-bottom: 1px solid var(--db-theme-border) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-color-row:last-child {
+  border-bottom: 0 !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-system-section {
+  padding: 16px 0 !important;
+  border-bottom: 1px solid var(--db-theme-border) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-color-context,
+:root[data-doubao-theme] .doubao-theme-save-status {
+  color: rgba(var(--db-theme-foreground-rgb), 0.58) !important;
+  font-size: 12px !important;
+  line-height: 18px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-system-pair {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 16px !important;
+  padding: 0 !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-system-pair .doubao-theme-setting-label {
+  display: block !important;
+  margin-bottom: 8px !important;
+  font-size: 12px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-color-context,
+:root[data-doubao-theme] .doubao-theme-save-status {
+  margin: 12px 0 0 !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-system-section[hidden],
+:root[data-doubao-theme] .doubao-theme-color-context[hidden],
+:root[data-doubao-theme] .doubao-theme-save-status[hidden] {
+  display: none !important;
+}
+
+:root[data-doubao-theme] #input-engine-container [data-doubao-clean-input="overflow-container"],
+:root[data-doubao-theme] #input-engine-container [data-doubao-clean-input="overflow"] {
+  flex: 0 0 40px !important;
+  width: 40px !important;
+  max-width: 40px !important;
+  min-width: 0 !important;
+}
+
+:root[data-doubao-theme] #input-engine-container [data-doubao-clean-input="spacer"] {
+  display: none !important;
+}
+
+/* Keep a measurable native anchor so its original popup opens beside More. */
+:root[data-doubao-theme] #input-engine-container [data-doubao-clean-input="computer-anchor"] {
+  position: fixed !important;
+  left: var(--doubao-clean-anchor-left) !important;
+  top: var(--doubao-clean-anchor-top) !important;
+  width: 32px !important;
+  height: 32px !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Doubao mounts this popup inside its trigger; only the trigger is hidden. */
+:root[data-doubao-theme] #input-engine-container [data-doubao-clean-input="computer-anchor"] [data-radix-popper-content-wrapper] {
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-clean-computer-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  height: 38px !important;
+  padding: 4px 10px !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  background: transparent !important;
+  color: var(--db-theme-foreground) !important;
+  font: inherit !important;
+  font-size: 14px !important;
+  line-height: 22px !important;
+  text-align: left !important;
+  cursor: pointer !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-clean-computer-item > svg {
+  width: 16px !important;
+  height: 16px !important;
+  flex: 0 0 16px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-clean-computer-chevron {
+  margin-left: auto !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.5) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-clean-computer-item:not(:disabled):is(:hover, :focus-visible) {
+  background: var(--db-theme-surface-hover) !important;
+  outline: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-clean-computer-item:disabled {
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-preset-select {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-preset-control {
+  position: relative !important;
+  width: 100% !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-preset-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  height: 38px !important;
+  padding: 0 12px !important;
+  border: 1px solid var(--db-theme-border-strong) !important;
+  border-radius: 10px !important;
+  background: var(--db-theme-surface-elevated) !important;
+  color: var(--db-theme-foreground) !important;
+  font-size: 13px !important;
+  font-weight: 450 !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-preset-chevron {
+  display: grid !important;
+  width: 18px !important;
+  height: 18px !important;
+  place-items: center !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.58) !important;
+  line-height: 1 !important;
+  transform: translateY(-1px) !important;
+  transition: transform 140ms ease !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-preset-chevron svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-preset-button[aria-expanded="true"] .doubao-theme-preset-chevron {
+  transform: translateY(1px) rotate(180deg) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-preset-menu {
+  position: absolute !important;
+  z-index: 4 !important;
+  top: calc(100% + 6px) !important;
+  right: 0 !important;
+  left: 0 !important;
+  display: grid !important;
+  gap: 2px !important;
+  max-height: 260px !important;
+  padding: 6px !important;
+  overflow-y: auto !important;
+  border: 1px solid var(--db-theme-border-strong) !important;
+  border-radius: 12px !important;
+  background: var(--db-theme-surface-elevated) !important;
+  box-shadow: 0 14px 34px var(--db-theme-overlay-shadow) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-preset-menu[hidden] {
+  display: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-preset-option {
+  position: relative !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
+  min-height: 34px !important;
+  padding: 0 28px 0 12px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.78) !important;
+  text-align: left !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-preset-option::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 8px !important;
+  right: 10px !important;
+  left: auto !important;
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-preset-option:hover,
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-preset-option:focus-visible {
+  background: var(--db-theme-surface-hover) !important;
+  color: var(--db-theme-foreground) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-preset-option[aria-selected="true"] {
+  background: rgba(var(--db-theme-accent-rgb), 0.12) !important;
+  color: var(--db-theme-foreground) !important;
+  font-weight: 500 !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-preset-option[aria-selected="true"]::before {
+  background: var(--db-theme-accent) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-color-control {
+  display: grid !important;
+  grid-template-columns: 42px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-color-picker {
+  width: 42px !important;
+  height: 38px !important;
+  padding: 3px !important;
+  border: 1px solid var(--db-theme-border-strong) !important;
+  border-radius: 10px !important;
+  background: var(--db-theme-surface-elevated) !important;
+  cursor: pointer !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-color-picker::-webkit-color-swatch-wrapper {
+  padding: 0 !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-color-picker::-webkit-color-swatch {
+  border: 0 !important;
+  border-radius: 7px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-color-hex {
+  width: 100% !important;
+  height: 38px !important;
+  padding: 0 11px !important;
+  border: 1px solid var(--db-theme-border-strong) !important;
+  border-radius: 10px !important;
+  background: var(--db-theme-surface-elevated) !important;
+  color: var(--db-theme-foreground) !important;
+  font-family: var(--db-theme-font-ui) !important;
+  font-size: 13px !important;
+  font-variant-numeric: tabular-nums !important;
+  text-transform: uppercase !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-color-hex[aria-invalid="true"] {
+  border-color: var(--db-theme-accent-pressed) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-setting-row {
+  display: grid !important;
+  grid-template-columns: minmax(220px, 0.9fr) minmax(200px, 1.1fr) 56px !important;
+  align-items: center !important;
+  gap: 18px !important;
+  min-height: 70px !important;
+  border-bottom: 1px solid var(--db-theme-border) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-setting-row:last-child {
+  border-bottom: 0 !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-setting-label {
+  display: block !important;
+  color: var(--db-theme-foreground) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.005em !important;
+  line-height: 19px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-setting-description {
+  display: block !important;
+  margin-top: 2px !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.48) !important;
+  font-size: 12px !important;
+  line-height: 18px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-setting-input {
+  width: 100% !important;
+  accent-color: var(--db-theme-accent) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-setting-output {
+  justify-self: end !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.76) !important;
+  font-variant-numeric: tabular-nums !important;
+  font-size: 13px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-toggle-control {
+  grid-column: 2 / 4 !important;
+  justify-self: end !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-setting-toggle {
+  appearance: none !important;
+  position: relative !important;
+  width: 42px !important;
+  height: 24px !important;
+  margin: 0 !important;
+  border: 1px solid var(--db-theme-border-strong) !important;
+  border-radius: 999px !important;
+  background: var(--db-theme-surface-elevated) !important;
+  cursor: pointer !important;
+  transition: background-color 140ms ease, border-color 140ms ease !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-setting-toggle::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 2px !important;
+  left: 2px !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 999px !important;
+  background: rgba(var(--db-theme-foreground-rgb), 0.72) !important;
+  box-shadow: 0 1px 3px var(--db-theme-overlay-shadow) !important;
+  transition: transform 140ms ease, background-color 140ms ease !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-setting-toggle:checked {
+  border-color: var(--db-theme-accent) !important;
+  background: var(--db-theme-accent) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-setting-toggle:checked::after {
+  background: var(--db-theme-background) !important;
+  transform: translateX(18px) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel button {
+  min-height: 34px !important;
+  padding: 0 12px !important;
+  border: 1px solid var(--db-theme-border) !important;
+  border-radius: 9px !important;
+  background: var(--db-theme-surface-elevated) !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.80) !important;
+  font-family: var(--db-theme-font-ui) !important;
+  font-size: 13px !important;
+  font-weight: 450 !important;
+  cursor: pointer !important;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease, transform 120ms ease !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel button:hover {
+  background: var(--db-theme-surface-hover) !important;
+  color: var(--db-theme-foreground) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel button:active:not(:disabled) {
+  transform: translateY(1px) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel button svg {
+  width: 15px !important;
+  height: 15px !important;
+  flex: 0 0 auto !important;
+  pointer-events: none !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-icon-button {
+  display: inline-grid !important;
+  width: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  padding: 0 !important;
+  place-items: center !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-button-with-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-settings-close {
+  width: 34px !important;
+  min-width: 34px !important;
+  min-height: 34px !important;
+  border-color: transparent !important;
+  border-radius: 10px !important;
+  background: transparent !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.58) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-settings-close:hover {
+  background: var(--db-theme-surface-hover) !important;
+  color: var(--db-theme-foreground) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-footer-note {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.44) !important;
+  font-size: 11px !important;
+  line-height: 16px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-footer-note::before {
+  content: "" !important;
+  width: 5px !important;
+  height: 5px !important;
+  border-radius: 999px !important;
+  background: var(--db-theme-accent) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-settings-reset {
+  min-height: 30px !important;
+  padding: 0 8px !important;
+  border-color: transparent !important;
+  background: transparent !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.58) !important;
+  font-size: 12px !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-settings-reset:hover {
+  background: var(--db-theme-surface-hover) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel #doubao-theme-welcome-image-upload:hover:not(:disabled) {
+  border-color: var(--db-theme-accent) !important;
+  background: var(--db-theme-accent) !important;
+  color: var(--db-theme-background) !important;
+  box-shadow: 0 0 0 3px rgba(var(--db-theme-accent-rgb), 0.14) !important;
+  transform: translateY(-1px) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel #doubao-theme-welcome-image-upload:active:not(:disabled) {
+  border-color: var(--db-theme-accent-pressed) !important;
+  background: var(--db-theme-accent-pressed) !important;
+  color: var(--db-theme-background) !important;
+  box-shadow: none !important;
+  transform: translateY(0) !important;
+}
+
+:root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-welcome-library-item .doubao-theme-welcome-library-remove.doubao-theme-icon-button {
+  width: 24px !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  padding: 0 !important;
+}
+
+@media (max-width: 680px) {
+  :root[data-doubao-theme] .doubao-theme-settings-layer {
+    padding: 12px !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-settings-panel {
+    width: calc(100vw - 24px) !important;
+    max-height: calc(100vh - 24px) !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-settings-header,
+  :root[data-doubao-theme] .doubao-theme-settings-footer {
+    padding: 14px 16px !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-settings-tabs {
+    margin-right: 16px !important;
+    margin-left: 16px !important;
+    padding: 3px !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-settings-pane {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-setting-row {
+    grid-template-columns: 1fr 52px !important;
+    gap: 10px !important;
+    padding: 14px 0 !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-setting-copy {
+    grid-column: 1 / -1 !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-toggle-control {
+    grid-column: 1 / -1 !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-preset-row,
+  :root[data-doubao-theme] .doubao-theme-color-row {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    padding: 14px 0 !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-color-control {
+    width: 100% !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-welcome-preview {
+    min-height: 0 !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-welcome-preview-actions > span {
+    display: none !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-welcome-preview-actions {
+    gap: 4px !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-welcome-zoom-control output {
+    min-width: 38px !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-welcome-preview-stage {
+    min-height: 188px !important;
+    padding: 18px 14px !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-welcome-section-header {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-welcome-image-control {
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-welcome-library-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  :root[data-doubao-theme] .doubao-theme-settings-panel .doubao-theme-welcome-image-control .doubao-theme-welcome-quiet-action {
+    margin-left: 0 !important;
+  }
+}
+
+/* Update entry shares the existing footer, without changing panel height. */
+:root[data-doubao-theme] .doubao-theme-footer-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+}
+:root[data-doubao-theme] .doubao-theme-update {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  color: rgba(var(--db-theme-foreground-rgb), 0.58) !important;
+  font-size: 11px !important;
+}
+:root[data-doubao-theme] #doubao-theme-check-updates:disabled {
+  cursor: default !important;
+  opacity: 0.55 !important;
+}

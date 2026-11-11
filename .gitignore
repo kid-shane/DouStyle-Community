@@ -1,0 +1,38 @@
+/build/
+/dist/
+
+# Local dependencies, caches and generated reports
+node_modules/
+.cache/
+coverage/
+playwright-report/
+test-results/
+*.log
+*.tsbuildinfo
+
+# Real-client captures may contain conversations and personal settings.
+# Keep test source files (qa-*.mjs), not their generated output.
+/qa/
+/design-explorations/**/preview*/
+/design-explorations/**/*.png
+
+# Local settings and signing credentials must never enter Git history.
+.env
+.env.*
+!.env.example
+*.local
+*.p8
+*.p12
+*.pfx
+*.pem
+*.key
+*.mobileprovision
+
+# macOS / editor files
+.DS_Store
+._*
+.idea/
+.vscode/
+
+# Python protection-function test caches
+__pycache__/

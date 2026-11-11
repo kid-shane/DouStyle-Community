@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="tile">
+      <rect x="44" y="44" width="936" height="936" rx="220"/>
+    </clipPath>
+
+    <linearGradient id="spectrumBase" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#22BFEF"/>
+      <stop offset="0.34" stop-color="#288FF0"/>
+      <stop offset="0.68" stop-color="#7359EF"/>
+      <stop offset="1" stop-color="#D83BB6"/>
+    </linearGradient>
+
+    <radialGradient id="warmBloom" cx="0.13" cy="0.09" r="0.72">
+      <stop offset="0" stop-color="#FFBB55"/>
+      <stop offset="0.28" stop-color="#FF984C"/>
+      <stop offset="0.55" stop-color="#FF5D6F" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#FF5D6F" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="pinkBloom" cx="0.86" cy="0.08" r="0.68">
+      <stop offset="0" stop-color="#F72C78"/>
+      <stop offset="0.38" stop-color="#E839A9" stop-opacity="0.94"/>
+      <stop offset="1" stop-color="#E839A9" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="greenBloom" cx="0.03" cy="0.66" r="0.53">
+      <stop offset="0" stop-color="#21C896"/>
+      <stop offset="0.34" stop-color="#50D9A0"/>
+      <stop offset="0.62" stop-color="#7BDBA9" stop-opacity="0.72"/>
+      <stop offset="1" stop-color="#7BDBA9" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="cyanBloom" cx="0.42" cy="1.02" r="0.62">
+      <stop offset="0" stop-color="#11B7F0"/>
+      <stop offset="0.42" stop-color="#219CF2" stop-opacity="0.86"/>
+      <stop offset="1" stop-color="#219CF2" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="softCenter" cx="0.30" cy="0.48" r="0.42">
+      <stop offset="0" stop-color="#FFF4E4" stop-opacity="0.68"/>
+      <stop offset="0.48" stop-color="#F7CBCC" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#F7CBCC" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <g clip-path="url(#tile)">
+    <rect x="44" y="44" width="936" height="936" fill="url(#spectrumBase)"/>
+    <rect x="44" y="44" width="936" height="936" fill="url(#warmBloom)"/>
+    <rect x="44" y="44" width="936" height="936" fill="url(#pinkBloom)"/>
+    <rect x="44" y="44" width="936" height="936" fill="url(#greenBloom)"/>
+    <rect x="44" y="44" width="936" height="936" fill="url(#cyanBloom)"/>
+    <rect x="44" y="44" width="936" height="936" fill="url(#softCenter)"/>
+  </g>
+
+  <path
+    fill="#FFFFFF"
+    fill-rule="evenodd"
+    d="M512 148C720 148 850 291 850 501C850 715 715 852 510 857C301 862 170 724 170 516C170 304 299 148 512 148ZM354 491C438 410 531 357 632 356C730 355 790 424 781 510C772 595 702 652 608 655C511 658 424 596 354 491Z"
+  />
+</svg>

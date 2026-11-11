@@ -1,0 +1,481 @@
+{
+  "format": "doustyle.skin",
+  "schemaVersion": 1,
+  "id": "windows-xp",
+  "name": "Windows XP",
+  "author": "豆Style",
+  "version": "1.0.0",
+  "description": "熟悉的蓝色标题栏、米灰面板和立体按钮。把今天的工作，装进记忆里的窗口。",
+  "baseMode": "light",
+  "tokens": {
+    "accent": "#0055EA",
+    "accentHover": "#1C72F2",
+    "accentPressed": "#003CBA",
+    "accentDeep": "#003399",
+    "link": "#003399",
+    "linkHover": "#0055EA",
+    "background": "#FFFFFF",
+    "sidebar": "#ECE9D8",
+    "surface": "#ECE9D8",
+    "surfaceSecondary": "#E4E0CD",
+    "surfaceTertiary": "#D6D2C2",
+    "surfaceElevated": "#FFFFFF",
+    "surfaceHover": "#DCEBFE",
+    "selectionBackground": "#316AC5",
+    "border": "#ACA899",
+    "borderStrong": "#7F9DB9",
+    "foreground": "#1A2130",
+    "userMessageBackground": "#EEF4FF",
+    "userMessageText": "#172A46",
+    "scrollbar": "#C5D9F6",
+    "scrollbarHover": "#90B8EE",
+    "contentCanvas": "#FFFFFF",
+    "overlayShadow": "rgba(0,0,0,0.22)",
+    "fontUi": "Tahoma, \"Microsoft Sans Serif\", \"PingFang SC\", sans-serif",
+    "fontChat": "Tahoma, \"PingFang SC\", sans-serif",
+    "colorScheme": "light",
+    "accentRgb": "0, 85, 234",
+    "accentHoverRgb": "28, 114, 242",
+    "accentPressedRgb": "0, 60, 186",
+    "accentDeepRgb": "0, 51, 153",
+    "linkRgb": "0, 51, 153",
+    "linkHoverRgb": "0, 85, 234",
+    "backgroundRgb": "255, 255, 255",
+    "sidebarRgb": "236, 233, 216",
+    "surfaceRgb": "236, 233, 216",
+    "surfaceSecondaryRgb": "228, 224, 205",
+    "surfaceTertiaryRgb": "214, 210, 194",
+    "surfaceElevatedRgb": "255, 255, 255",
+    "surfaceHoverRgb": "220, 235, 254",
+    "selectionBackgroundRgb": "49, 106, 197",
+    "borderRgb": "172, 168, 153",
+    "borderStrongRgb": "127, 157, 185",
+    "foregroundRgb": "26, 33, 48",
+    "userMessageBackgroundRgb": "238, 244, 255",
+    "userMessageTextRgb": "23, 42, 70",
+    "scrollbarRgb": "197, 217, 246",
+    "scrollbarHoverRgb": "144, 184, 238",
+    "contentCanvasRgb": "255, 255, 255"
+  },
+  "layout": {
+    "uiFontSize": 14,
+    "chatFontSize": 15,
+    "chatLineHeight": 1.65,
+    "contentGutter": 140,
+    "uniformChatTypography": false,
+    "showConversationIcons": true
+  },
+  "assets": {},
+  "welcome": {
+    "text": "欢迎回来。今天有什么工作要处理？",
+    "image": "none"
+  },
+  "decoration": {
+    "title": "豆包工作 · Windows XP",
+    "emblem": "computer"
+  },
+  "rules": [
+    {
+      "target": "shell",
+      "style": {
+        "border": "3px solid #0055EA",
+        "border-radius": "7px 7px 0 0",
+        "background": "#ECE9D8"
+      }
+    },
+    {
+      "target": "main",
+      "style": {
+        "background": "#FFFFFF"
+      }
+    },
+    {
+      "target": "titlebar",
+      "style": {
+        "background": "linear-gradient(180deg, #5197F7 0%, #075BEA 8%, #0054E3 45%, #0969F4 88%, #003CBB 100%)",
+        "border-bottom": "1px solid #003399",
+        "box-shadow": "inset 0 1px 0 #83B5FF",
+        "color": "#FFFFFF",
+        "height": "42px",
+        "min-height": "42px",
+        "padding-left": "12px",
+        "padding-right": "12px"
+      }
+    },
+    {
+      "target": "titlebarButton",
+      "style": {
+        "background": "linear-gradient(135deg, #6BA4FF, #1262DD)",
+        "border": "1px solid #FFFFFF",
+        "border-radius": "3px",
+        "color": "#FFFFFF",
+        "box-shadow": "inset 1px 1px 0 #A5CAFF, 1px 1px 1px #003B9F"
+      }
+    },
+    {
+      "target": "titlebarButton",
+      "state": "hover",
+      "style": {
+        "background": "#71AAFF"
+      }
+    },
+    {
+      "target": "sidebar",
+      "style": {
+        "background": "linear-gradient(180deg, #F0F0E6, #ECE9D8 35%)",
+        "border-right": "2px groove #FFFFFF"
+      }
+    },
+    {
+      "target": "sidebarHeading",
+      "style": {
+        "color": "#173B73",
+        "font-weight": "700",
+        "font-size": "17px",
+        "text-shadow": "1px 1px 0 #FFFFFF"
+      }
+    },
+    {
+      "target": "sidebarGroup",
+      "style": {
+        "background": "linear-gradient(90deg, #FFFFFF, #C4D8F8)",
+        "color": "#214783",
+        "border-radius": "4px 4px 0 0",
+        "border-bottom": "1px solid #AAC2E7"
+      }
+    },
+    {
+      "target": "navigation",
+      "style": {
+        "border-radius": "2px",
+        "color": "#183B72"
+      }
+    },
+    {
+      "target": "navigation",
+      "state": "hover",
+      "style": {
+        "background": "#C1D2EE",
+        "box-shadow": "inset 0 0 0 1px #8BA7CE"
+      }
+    },
+    {
+      "target": "navigationIcon",
+      "style": {
+        "color": "#246FC7",
+        "fill": "#D8E9FF",
+        "stroke": "#235AA1"
+      }
+    },
+    {
+      "target": "conversation",
+      "style": {
+        "border-radius": "1px"
+      }
+    },
+    {
+      "target": "conversation",
+      "state": "hover",
+      "style": {
+        "background": "#DCEBFC"
+      }
+    },
+    {
+      "target": "selectedConversation",
+      "style": {
+        "background": "#C1D2EE",
+        "color": "#172A46",
+        "border-radius": "1px",
+        "box-shadow": "inset 0 0 0 1px #8DA8CC"
+      }
+    },
+    {
+      "target": "greeting",
+      "style": {
+        "font-family": "Tahoma, \"Microsoft Sans Serif\", \"PingFang SC\", sans-serif",
+        "font-size": "24px",
+        "font-weight": "600",
+        "color": "#214783",
+        "text-shadow": "1px 1px 0 #FFFFFF"
+      }
+    },
+    {
+      "target": "composer",
+      "style": {
+        "background": "#ECE9D8",
+        "border": "1px solid #7F9DB9",
+        "border-radius": "3px",
+        "box-shadow": "inset 1px 1px 0 #FFFFFF, 2px 2px 0 #D4D0C8"
+      }
+    },
+    {
+      "target": "composerBody",
+      "style": {
+        "background": "#ECE9D8",
+        "border-radius": "2px",
+        "gap": "10px"
+      }
+    },
+    {
+      "target": "editor",
+      "style": {
+        "background": "#FFFFFF",
+        "border": "1px solid #7F9DB9",
+        "border-radius": "0px",
+        "box-shadow": "inset 1px 1px 1px #D3D3D3",
+        "padding": "10px",
+        "min-height": "58px"
+      }
+    },
+    {
+      "target": "composerButton",
+      "style": {
+        "background": "linear-gradient(180deg, #FFFFFF 0%, #F5F3EB 48%, #E6E2D2 100%)",
+        "border": "1px solid #003C74",
+        "border-radius": "3px",
+        "box-shadow": "inset 1px 1px 0 #FFFFFF, inset -1px -1px 0 #D3D0C1",
+        "color": "#16223B",
+        "font-weight": "400"
+      }
+    },
+    {
+      "target": "composerButton",
+      "state": "hover",
+      "style": {
+        "background": "linear-gradient(180deg, #FFFFFF, #FFF2CC)",
+        "box-shadow": "inset 0 0 0 1px #F4C86B"
+      }
+    },
+    {
+      "target": "composerButton",
+      "state": "active",
+      "style": {
+        "background": "#DAD6C8",
+        "box-shadow": "inset 1px 1px 2px #9E9A91"
+      }
+    },
+    {
+      "target": "composerButton",
+      "state": "disabled",
+      "style": {
+        "opacity": "0.5"
+      }
+    },
+    {
+      "target": "userMessage",
+      "style": {
+        "border": "1px solid #A5BCD9",
+        "border-radius": "3px",
+        "box-shadow": "inset 1px 1px 0 #FFFFFF"
+      }
+    },
+    {
+      "target": "menu",
+      "style": {
+        "background": "#FFFFFF",
+        "border": "1px solid #ACA899",
+        "border-radius": "0px",
+        "padding": "3px",
+        "box-shadow": "3px 3px 0 rgba(0,0,0,0.18)"
+      }
+    },
+    {
+      "target": "menuItem",
+      "style": {
+        "border-radius": "0px"
+      }
+    },
+    {
+      "target": "menuItem",
+      "state": "hover",
+      "style": {
+        "background": "#316AC5",
+        "color": "#FFFFFF"
+      }
+    },
+    {
+      "target": "dialog",
+      "style": {
+        "background": "#ECE9D8",
+        "border": "2px solid #0055EA",
+        "border-radius": "7px 7px 0 0",
+        "box-shadow": "3px 4px 12px rgba(0,0,0,0.25)"
+      }
+    },
+    {
+      "target": "settings",
+      "style": {
+        "background": "#ECE9D8",
+        "border": "3px solid #0055EA",
+        "border-radius": "7px 7px 0 0",
+        "box-shadow": "3px 4px 14px rgba(0,0,0,0.27)"
+      }
+    },
+    {
+      "target": "settingsHeader",
+      "style": {
+        "background": "linear-gradient(180deg, #5197F7 0%, #075BEA 8%, #0054E3 45%, #0969F4 88%, #003CBB 100%)",
+        "padding": "11px 14px",
+        "margin-bottom": "14px",
+        "border-radius": "3px 3px 0 0",
+        "color": "#FFFFFF"
+      }
+    },
+    {
+      "target": "settingsTitle",
+      "style": {
+        "font-family": "Tahoma, \"Microsoft Sans Serif\", \"PingFang SC\", sans-serif",
+        "font-size": "16px",
+        "color": "#FFFFFF",
+        "text-shadow": "1px 1px 0 #003399"
+      }
+    },
+    {
+      "target": "settingsSubtitle",
+      "style": {
+        "color": "#DDEBFF",
+        "font-size": "11px",
+        "margin-top": "4px"
+      }
+    },
+    {
+      "target": "settingsClose",
+      "style": {
+        "background": "linear-gradient(135deg, #F8B9A7, #DB4A28 50%, #B62B11)",
+        "border": "1px solid #FFFFFF",
+        "border-radius": "3px",
+        "color": "#FFFFFF",
+        "box-shadow": "inset 1px 1px 0 #FFC5B5"
+      }
+    },
+    {
+      "target": "settingsTab",
+      "style": {
+        "border": "1px solid #919B9C",
+        "border-radius": "3px 3px 0 0",
+        "background": "linear-gradient(180deg, #FFFFFF, #E7E4D5)",
+        "color": "#1A2130",
+        "box-shadow": "none"
+      }
+    },
+    {
+      "target": "settingsSelectedTab",
+      "style": {
+        "background": "#FCFCF9",
+        "border-top": "3px solid #E8AA43",
+        "font-weight": "600"
+      }
+    },
+    {
+      "target": "settingsButton",
+      "style": {
+        "background": "linear-gradient(180deg, #FFFFFF 0%, #F5F3EB 48%, #E6E2D2 100%)",
+        "border": "1px solid #003C74",
+        "border-radius": "3px",
+        "box-shadow": "inset 1px 1px 0 #FFFFFF, inset -1px -1px 0 #D3D0C1",
+        "color": "#16223B",
+        "font-weight": "400"
+      }
+    },
+    {
+      "target": "settingsButton",
+      "state": "hover",
+      "style": {
+        "background": "#FFF3D8",
+        "box-shadow": "inset 0 0 0 1px #E9B652"
+      }
+    },
+    {
+      "target": "settingsButton",
+      "state": "active",
+      "style": {
+        "background": "#DAD6C8",
+        "box-shadow": "inset 1px 1px 2px #9E9A91"
+      }
+    },
+    {
+      "target": "settingsInput",
+      "style": {
+        "background": "#FFFFFF",
+        "border": "1px solid #7F9DB9",
+        "border-radius": "0px",
+        "box-shadow": "inset 1px 1px 0 #E3E3E3"
+      }
+    },
+    {
+      "target": "settingsFooter",
+      "style": {
+        "background": "#ECE9D8",
+        "border-top": "1px solid #D6D2C2"
+      }
+    },
+    {
+      "target": "skinCard",
+      "style": {
+        "border": "1px solid #ACA899",
+        "border-radius": "2px",
+        "background": "#FFFFFF"
+      }
+    },
+    {
+      "target": "skinBadge",
+      "style": {
+        "background": "#E3EDFF",
+        "color": "#174883",
+        "border-radius": "2px"
+      }
+    },
+    {
+      "target": "scrollbar",
+      "style": {
+        "width": "14px",
+        "background": "#F1F0E8"
+      }
+    },
+    {
+      "target": "scrollbarThumb",
+      "style": {
+        "background": "linear-gradient(90deg, #DBEAFE, #BAD2F5)",
+        "border": "1px solid #8CAADD",
+        "border-radius": "2px"
+      }
+    },
+    {
+      "target": "composerOutline",
+      "style": {
+        "border-radius": "3px",
+        "border": "0px"
+      }
+    },
+    {
+      "target": "composerSurface",
+      "style": {
+        "border-radius": "2px",
+        "background": "#ECE9D8"
+      }
+    },
+    {
+      "target": "sidebarGroupText",
+      "style": {
+        "color": "#214783",
+        "font-weight": "600"
+      }
+    },
+    {
+      "target": "projectIcon",
+      "style": {
+        "color": "#B38219",
+        "fill": "#B38219",
+        "background": "linear-gradient(180deg, #FFF0A2, #EAC35E)",
+        "border-radius": "2px"
+      }
+    },
+    {
+      "target": "titlebarIcon",
+      "style": {
+        "color": "#FFFFFF",
+        "fill": "currentColor"
+      }
+    }
+  ]
+}

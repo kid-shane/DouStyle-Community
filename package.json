@@ -1,0 +1,14 @@
+{
+  "name": "doustyle-community",
+  "version": "1.1.1",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "test": "node --test qa-doubao-target.test.mjs qa-skins.test.mjs qa-theme-appearance.test.mjs qa-update-bridge.test.mjs qa-workshop.test.mjs qa-windows-launcher.test.mjs",
+    "validate": "node validate-theme.mjs all",
+    "test:ui": "node qa-theme-appearance-runtime.mjs && node qa-clean-input-runtime.mjs && node qa-current-client-runtime.mjs && node qa-collapsed-message-runtime.mjs && node qa-release-runtime.mjs && node qa-update-runtime.mjs && node qa-skins-runtime.mjs && node qa-windows-shared-runtime.mjs"
+  },
+  "devDependencies": { "playwright": "1.65.0" }
+}

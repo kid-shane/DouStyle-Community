@@ -1,0 +1,127 @@
+{
+  "version": 10,
+  "storageKey": "doubao-local-appearance-v1",
+  "defaultTheme": {
+    "id": "mira",
+    "revision": 1
+  },
+  "systemTheme": {
+    "light": "doubao-default",
+    "dark": "doubao-dark"
+  },
+  "welcome": {
+    "defaultText": "今天有什么工作要处理？",
+    "maxTextLength": 40,
+    "maxImageBytes": 2097152,
+    "maxImageCount": 10,
+    "imageLayout": {
+      "zoom": 100,
+      "zoomMin": 0,
+      "zoomMax": 300,
+      "zoomStep": 10,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "acceptedImageTypes": [
+      "image/png",
+      "image/jpeg",
+      "image/webp",
+      "image/gif",
+      "image/avif"
+    ]
+  },
+  "colorControls": [
+    {
+      "key": "accent",
+      "label": "强调色",
+      "description": "按钮、链接、选中态与焦点"
+    },
+    {
+      "key": "background",
+      "label": "背景",
+      "description": "主界面背景，并自动生成相邻层级"
+    },
+    {
+      "key": "foreground",
+      "label": "前景",
+      "description": "正文与主要界面文字"
+    },
+    {
+      "key": "userMessageBackground",
+      "label": "我的消息底色",
+      "description": "仅影响我发送的会话气泡"
+    },
+    {
+      "key": "userMessageText",
+      "label": "我的消息文字",
+      "description": "仅影响我发送的会话文字"
+    }
+  ],
+  "toggles": [
+    {
+      "key": "uniformChatTypography",
+      "label": "统一会话字号",
+      "description": "助手回复、思考过程与我的消息统一跟随正文字号，保留粗体层级",
+      "default": true
+    },
+    {
+      "key": "showConversationIcons",
+      "label": "隐藏任务图标",
+      "description": "隐藏置顶与最近任务前的来源图标",
+      "inverted": true,
+      "default": false
+    },
+    {
+      "key": "cleanInput",
+      "label": "清爽输入",
+      "description": "将电脑、项目和确认方式等选项收入加号旁的“更多”",
+      "default": false
+    }
+  ],
+  "controls": [
+    {
+      "key": "uiFontSize",
+      "label": "界面字号",
+      "description": "侧边栏、按钮与输入区域",
+      "cssVariable": "--db-pref-ui-font-size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "key": "chatFontSize",
+      "label": "正文字号",
+      "description": "会话正文与列表内容",
+      "cssVariable": "--db-pref-chat-font-size",
+      "min": 13,
+      "max": 20,
+      "step": 1,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "key": "chatLineHeight",
+      "label": "正文行高",
+      "description": "控制长回复的阅读密度",
+      "cssVariable": "--db-pref-chat-line-height",
+      "min": 1.4,
+      "max": 1.9,
+      "step": 0.05,
+      "default": 1.65,
+      "unit": ""
+    },
+    {
+      "key": "contentGutter",
+      "label": "两侧边距",
+      "description": "值越大，回复、我的消息与输入框越窄",
+      "cssVariable": "--db-pref-content-gutter",
+      "min": 12,
+      "max": 360,
+      "step": 4,
+      "default": 256,
+      "unit": "px"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+name: 兼容问题或故障
+description: 反馈豆包更新后的显示、设置或启动问题
+body:
+  - type: input
+    id: version
+    attributes:
+      label: 豆Style版本与豆包版本
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: 操作系统与芯片架构
+      placeholder: macOS 15 / Apple M 系列，或 Windows 11 x64
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 操作步骤、预期与实际结果
+    validations:
+      required: true
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: 脱敏截图或日志
+      description: 提交前隐藏会话、账号与其他个人信息。
