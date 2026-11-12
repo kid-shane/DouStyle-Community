@@ -24,7 +24,7 @@ GitHub Actions 通过相同的 npm 命令发现测试，界面套件依次执行
 | `tests/unit/windows-launcher.test.mjs` | 启动路径、调试连接、等待时限与日志脱敏 |
 | `tests/ui/theme-appearance.test.mjs` | 配色选择、系统外观变化、重载与保存失败 |
 | `tests/ui/client-compatibility.test.mjs` | 侧栏入口、键盘与焦点、原生控件配色、收起与重新挂载 |
-| `tests/ui/client-2.36.test.mjs` | 新旧欢迎图替换、页面重新挂载、新版原生设置背景与文字对比度 |
+| `tests/ui/client-2.36.test.mjs` | 新旧欢迎图替换、页面重新挂载、旧图片迁移期间的选择、新版原生设置背景与文字对比度 |
 | `tests/ui/clean-input.test.mjs` | 原生工具菜单、首次宽度测量、隐藏占位按钮、键盘操作、草稿保留与未知结构回退 |
 | `tests/ui/collapsed-messages.test.mjs` | 长消息折叠、展开、背景、文字与渐隐 |
 | `tests/ui/settings.test.mjs` | 七套主题、设置分页、拖动、图片库、裁剪、重载与恢复默认 |

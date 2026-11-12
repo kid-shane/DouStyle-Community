@@ -119,4 +119,30 @@ try {
       assert.equal(custom.actual, rgb(custom.expected), "custom colors survive reinjection in native settings");
     } finally { await page.close(); }
   });
+
+  await test("legacy welcome migration preserves a selection changed while the database opens", async () => {
+    const page = await fixturePage('<main><div id="flow-chat-guidance-page"><div><img data-guidance-office-logo="true"><div class="greeting-text-fixture">原生欢迎语</div></div></div></main>');
+    try {
+      await page.evaluate(png => {
+        window.__doubaoThemeSetTheme('mira');
+        window.__doubaoThemeSetWelcomeImage(png);
+        const open = indexedDB.open.bind(indexedDB);
+        indexedDB.open = (...args) => {
+          const request = open(...args);
+          const listen = request.addEventListener.bind(request);
+          request.addEventListener = (type, listener, options) => listen(type,
+            type === 'success' ? event => { window.releaseLegacyMigration = () => listener(event); } : listener, options);
+          return request;
+        };
+      }, png);
+      await page.evaluate(source);
+      await page.waitForFunction(() => typeof window.releaseLegacyMigration === 'function');
+      assert.equal(await page.evaluate(() => window.__doubaoThemeSetWelcomeImage('none')), true);
+      await page.evaluate(() => window.releaseLegacyMigration());
+      await page.waitForFunction(() => window.__doubaoThemeGetSettings().welcomeImageLibrary.length === 1);
+      assert.equal(await page.evaluate(() => window.__doubaoThemeGetSettings().welcomeImageByTheme.mira), 'none');
+      await page.waitForFunction(() => !document.getElementById('doubao-theme-welcome-image'));
+      assert.equal(await page.locator('[data-guidance-office-logo]').isVisible(), false);
+    } finally { await page.close(); }
+  });
 } finally { await browser.close(); }
