@@ -4,9 +4,11 @@ export function installCleanInput(getEnabled, page = window) {
   const doc = page.document;
   let state = null;
   let frame = 0;
+  let layoutFrame = 0;
   let disposed = false;
   let transition = 0;
   const warmedTriggers = new WeakSet();
+  const remeasuredLists = new WeakSet();
   const setAttribute = (node, name, value) => {
     if (node.getAttribute(name) !== value) node.setAttribute(name, value);
   };
@@ -35,6 +37,8 @@ export function installCleanInput(getEnabled, page = window) {
   };
   const teardown = () => {
     transition += 1;
+    if (layoutFrame) page.cancelAnimationFrame(layoutFrame);
+    layoutFrame = 0;
     if (!state) return;
     detachMenu();
     resizeObserver.disconnect();
@@ -168,9 +172,10 @@ export function installCleanInput(getEnabled, page = window) {
       || state.listParent !== parts.listParent || state.spacers.length !== parts.spacers.length
       || state.spacers.some((node, index) => node !== parts.spacers[index])) {
       teardown();
-      state = { ...parts, moreLabel: parts.more?.getAttribute("aria-label") ?? null, menu: null, proxy: null, openedComputer: false };
+      state = { ...parts, moreLabel: parts.more?.getAttribute("aria-label") ?? null, menu: null, proxy: null, openedComputer: false, measuring: false };
       for (const node of [state.composer, state.listParent, state.list, state.more]) if (node) resizeObserver.observe(node);
     }
+    if (state.measuring) return;
     // React may reuse nodes but reset their attributes. Repair idempotently on
     // every sync, not just when the composer or menu trigger is replaced.
     mark(state.composer, "enabled");
@@ -180,13 +185,31 @@ export function installCleanInput(getEnabled, page = window) {
     // Keep Computer available until that real trigger is ready; ignore hidden
     // measurement copies of skill buttons when looking for it.
     if (!state.more) {
-      // Blueprint first renders a lazy-loading placeholder. Its mouseover
-      // handler loads the real menu; warm it once without opening any menu.
-      const placeholder = [...state.list.children].find(node => node.matches('button:not([data-slot="dropdown-menu-trigger"])')
-        && node.getAttribute("aria-hidden") !== "true");
+      // Blueprint's cold-start placeholder can still be aria-hidden after the
+      // list shrinks. Its mouseover loads the real menu without opening it.
+      const placeholder = [...state.list.children].find(node => node.matches('button:not([data-slot="dropdown-menu-trigger"])'));
       if (placeholder && !warmedTriggers.has(placeholder)) {
         warmedTriggers.add(placeholder);
         placeholder.dispatchEvent(new page.MouseEvent("mouseover", { bubbles: true }));
+      }
+      // Late-mounted Blueprint tools can overflow an already compact list while
+      // its spacer stays at zero. Let native layout measure at full width once;
+      // the next compact pass then triggers its normal repartitioning.
+      if (state.list.classList.contains("bp5-overflow-list") && state.list.scrollWidth > state.list.clientWidth + 1
+        && !remeasuredLists.has(state.list)) {
+        const current = state;
+        remeasuredLists.add(current.list);
+        current.measuring = true;
+        current.list.removeAttribute("data-doubao-clean-input");
+        current.listParent.removeAttribute("data-doubao-clean-input");
+        layoutFrame = page.requestAnimationFrame(() => {
+          layoutFrame = page.requestAnimationFrame(() => {
+            layoutFrame = 0;
+            if (disposed || state !== current) return;
+            current.measuring = false;
+            schedule();
+          });
+        });
       }
       return;
     }
