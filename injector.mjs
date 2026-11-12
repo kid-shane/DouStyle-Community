@@ -1114,7 +1114,10 @@ const injectionSource = `(() => {
       if (!replacements.size) return false;
       appearanceSettings.welcomeImageLibrary = nextLibrary;
       for (const [themeId, dataUrl] of legacyEntries) {
-        if (replacements.has(dataUrl)) appearanceSettings.welcomeImageByTheme[themeId] = replacements.get(dataUrl);
+        // Preserve a newer selection made while the image database was opening.
+        if (appearanceSettings.welcomeImageByTheme[themeId] === dataUrl && replacements.has(dataUrl)) {
+          appearanceSettings.welcomeImageByTheme[themeId] = replacements.get(dataUrl);
+        }
       }
       if (!writeSettings()) {
         appearanceSettings.welcomeImageLibrary = previousLibrary;

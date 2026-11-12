@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | `npm test` | 6 个单元测试文件，33 个用例 | Node.js；使用临时目录与本机测试服务 |
 | `npm run validate` | 7 套主题、颜色令牌与外观配置 | Node.js |
-| `npm run test:ui` | 9 组界面回归 | Playwright 与 Chrome；使用隔离浏览器配置和构造页面 |
+| `npm run test:ui` | 10 组界面回归 | Playwright 与 Chrome；使用隔离浏览器配置和构造页面 |
 
 GitHub Actions 通过相同的 npm 命令发现测试，界面套件依次执行。新增 `.test.mjs` 文件后会自动纳入对应目录的检查。本地已有 Chrome 时可以直接运行；尚未安装时执行 `npx playwright install chrome`。
 
@@ -24,7 +24,8 @@ GitHub Actions 通过相同的 npm 命令发现测试，界面套件依次执行
 | `tests/unit/windows-launcher.test.mjs` | 启动路径、调试连接、等待时限与日志脱敏 |
 | `tests/ui/theme-appearance.test.mjs` | 配色选择、系统外观变化、重载与保存失败 |
 | `tests/ui/client-compatibility.test.mjs` | 侧栏入口、键盘与焦点、原生控件配色、收起与重新挂载 |
-| `tests/ui/clean-input.test.mjs` | 原生工具菜单、键盘操作、草稿保留与未知结构回退 |
+| `tests/ui/client-2.36.test.mjs` | 新旧欢迎图替换、页面重新挂载、旧图片迁移期间的选择、新版原生设置背景与文字对比度 |
+| `tests/ui/clean-input.test.mjs` | 原生工具菜单、首次宽度测量、隐藏占位按钮、键盘操作、草稿保留与未知结构回退 |
 | `tests/ui/collapsed-messages.test.mjs` | 长消息折叠、展开、背景、文字与渐隐 |
 | `tests/ui/settings.test.mjs` | 七套主题、设置分页、拖动、图片库、裁剪、重载与恢复默认 |
 | `tests/ui/updates.test.mjs` | 检查更新入口、忙碌、失败重试与连接中断 |
@@ -39,7 +40,7 @@ node --test tests/unit/skins.test.mjs
 node --test tests/ui/clean-input.test.mjs
 ```
 
-构造页面固定了需要覆盖的结构，其中客户端适配用例包含豆包工作 2.33.7 的结构。升级适配时，把新增结构加入对应套件，并保留仍需支持的旧结构。Windows 快捷键使用浏览器平台信息模拟，Windows 启动与运行还需要真实系统验收。
+构造页面固定了需要覆盖的结构，其中客户端适配用例包含豆包工作 2.33.7 和 2.36.15 的结构。升级适配时，把新增结构加入对应套件，并保留仍需支持的旧结构。Windows 快捷键使用浏览器平台信息模拟，Windows 启动与运行还需要真实系统验收。
 
 ## 实机验收
 

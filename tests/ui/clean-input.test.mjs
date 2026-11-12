@@ -223,36 +223,80 @@ try {
   await page.evaluate(() => { window.cleanController.cleanup(); window.modernResizeObserver.disconnect(); });
   // The live client's Blueprint variant also has no More at wide widths and
   // lazy-loads its real menu only when the placeholder receives mouseover.
-  await page.evaluate(() => {
-    window.renderComposer();
-    const list = document.querySelector(".bp5-overflow-list");
-    const more = document.getElementById("more");
-    more.remove();
-    window.moreWarmups = 0;
-    window.lazyMoreObserver = new ResizeObserver(() => {
-      if (list.getBoundingClientRect().width > 40) { more.remove(); list.querySelector("#lazy-more")?.remove(); return; }
-      if (more.isConnected || list.querySelector("#lazy-more")) return;
-      const placeholder = document.createElement("button");
-      placeholder.id = "lazy-more"; placeholder.textContent = "…";
-      placeholder.addEventListener("mouseover", () => {
-        window.moreWarmups++;
-        requestAnimationFrame(() => { if (placeholder.isConnected) placeholder.replaceWith(more); });
+  for (const hiddenPlaceholder of [false, true]) {
+    await page.evaluate(hiddenPlaceholder => {
+      window.renderComposer();
+      window.cleanEnabled = true;
+      const list = document.querySelector(".bp5-overflow-list");
+      const more = document.getElementById("more");
+      more.remove();
+      window.moreWarmups = 0;
+      window.lazyMoreObserver = new ResizeObserver(() => {
+        if (list.getBoundingClientRect().width > 40) { more.remove(); list.querySelector("#lazy-more")?.remove(); return; }
+        if (more.isConnected || list.querySelector("#lazy-more")) return;
+        const placeholder = document.createElement("button");
+        placeholder.id = "lazy-more"; placeholder.textContent = "…";
+        if (hiddenPlaceholder) {
+          placeholder.setAttribute("aria-hidden", "true");
+          placeholder.style.visibility = "hidden";
+        }
+        placeholder.addEventListener("mouseover", () => {
+          window.moreWarmups++;
+          requestAnimationFrame(() => { if (placeholder.isConnected) placeholder.replaceWith(more); });
+        });
+        list.append(placeholder);
       });
-      list.append(placeholder);
+      window.lazyMoreObserver.observe(list.parentElement);
+    }, hiddenPlaceholder);
+    await install();
+    await page.getByRole("button", { name: "更多输入选项", exact: true }).waitFor({timeout:2000});
+    assert.equal(await page.evaluate(() => window.moreWarmups), 1, "lazy menu loads without mouse movement");
+    assert.equal(await page.locator("#computer > button").isVisible(), false);
+    await page.getByRole("button", { name: "更多输入选项", exact: true }).click();
+    await proxy.waitFor();
+    assert.equal(await page.getByRole("menuitem", { name: "项目", exact: true }).isVisible(), true);
+    await page.getByRole("button", { name: "更多输入选项", exact: true }).click();
+    await enabled(false);
+    assert.equal(await page.locator("#computer > button").isVisible(), true);
+    await page.evaluate(() => { window.cleanController.cleanup(); window.lazyMoreObserver.disconnect(); });
+  }
+  // At first mount Blueprint records its spacer width before watching for a
+  // change. Starting compact leaves that width at zero, so no repartition occurs.
+  // Mount native measurement and our adapter in the same frame to cover startup.
+  await page.evaluate(`(() => {
+    window.renderComposer(); window.cleanEnabled = true;
+    const list = document.querySelector('.bp5-overflow-list');
+    const more = document.getElementById('more'); more.remove();
+    list.querySelectorAll('.native-visible').forEach(node => {
+      node.className = 'overflow-visible-item-cold'; node.style.flexShrink = '0';
     });
-    window.lazyMoreObserver.observe(list.parentElement);
-  });
-  await install();
+    const spacer = document.createElement('div');
+    spacer.className = 'bp5-overflow-list-spacer'; spacer.style.flex = '1 1 0px';
+    list.append(spacer);
+    let previousWidth;
+    window.coldSpacerObserver = new ResizeObserver(([entry]) => {
+      const width = entry.contentRect.width;
+      if (previousWidth === undefined) { previousWidth = width; return; }
+      if (width === previousWidth) return;
+      previousWidth = width;
+      const compact = list.getBoundingClientRect().width <= 40;
+      list.querySelectorAll('.overflow-visible-item-cold').forEach(node => node.style.display = compact ? 'none' : 'block');
+      if (compact && !more.isConnected) spacer.before(more);
+      else if (!compact) more.remove();
+    });
+    window.coldSpacerObserver.observe(spacer);
+    window.cleanController = (${installCleanInput.toString()})(() => window.cleanEnabled);
+  })()`);
   await page.getByRole("button", { name: "更多输入选项", exact: true }).waitFor({timeout:2000});
-  assert.equal(await page.evaluate(() => window.moreWarmups), 1, "lazy menu loads without mouse movement");
-  assert.equal(await page.locator("#computer > button").isVisible(), false);
+  assert.equal(await page.locator("#computer > button").isVisible(), false, "cold startup waits for native measurement before hiding Computer");
   await page.getByRole("button", { name: "更多输入选项", exact: true }).click();
   await proxy.waitFor();
   assert.equal(await page.getByRole("menuitem", { name: "项目", exact: true }).isVisible(), true);
   await page.getByRole("button", { name: "更多输入选项", exact: true }).click();
   await enabled(false);
   assert.equal(await page.locator("#computer > button").isVisible(), true);
-  await page.evaluate(() => { window.cleanController.cleanup(); window.lazyMoreObserver.disconnect(); });
+  assert.equal(await page.locator(".tiptap").innerText(), "未发送草稿");
+  await page.evaluate(() => { window.cleanController.cleanup(); window.coldSpacerObserver.disconnect(); });
   assert.deepEqual(errors, []);
-  console.log("PASS clean input fixture: legacy and current deterministic toolbars, lazy nested More, measurement copies, native popup, keyboard, remount, marker repair, reparenting, delayed selectors, no mouse/manual sync, settled observers, fail-open, draft preservation");
+  console.log("PASS clean input fixture: legacy and current deterministic toolbars, native first spacer measurement, visible/hidden cold-start More placeholders, measurement copies, native popup, keyboard, remount, marker repair, reparenting, delayed selectors, no mouse/manual sync, settled observers, fail-open, draft preservation");
 } finally { await browser.close(); }
